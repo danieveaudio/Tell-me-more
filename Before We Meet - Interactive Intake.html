@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before We Meet — Strategy for the Wired & Wild</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;1,6..12,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --amber: #F7AB03;
+  --cyan: #00BBDC;
+  --purple: #7B66FF;
+  --magenta: #E93EFB;
+  --lavender: #DF6DF7;
+  --dpurple: #703BB0;
+  --mint: #1FE7B7;
+  --dark: #0C0818;
+  --surface: #14102A;
+  --surface2: #1C1638;
+  --text: #EDE8F5;
+  --dim: #8A7FAF;
+  --border: rgba(123,102,255,0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── PROGRESS ── */
+.progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 3px; background: rgba(255,255,255,0.04); z-index: 200;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber), var(--mint));
+  transition: width 0.6s cubic-bezier(.4,0,.2,1);
+  width: 0%;
+}
+
+/* ── HEADER ── */
+.site-header {
+  padding: 28px 48px;
+  display: flex; align-items: center; gap: 10px;
+  position: sticky; top: 0;
+  background: linear-gradient(to bottom, var(--dark) 60%, transparent);
+  z-index: 100;
+}
+.dot { width: 7px; height: 7px; background: var(--amber); border-radius: 50%; flex-shrink: 0; }
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ── LAYOUT ── */
+.wrap { max-width: 680px; margin: 0 auto; padding: 20px 40px 140px; }
+
+/* ── SECTIONS ── */
+.sec { display: none; }
+.sec.active { display: block; animation: rise .35s ease both; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION LABEL ── */
+.sec-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 10px;
+}
+
+/* ── Q NUMBER ── */
+.qnum {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; color: var(--dpurple); font-weight: 700;
+  margin-bottom: 10px; margin-top: 40px;
+}
+.qnum:first-child { margin-top: 0; }
+
+/* ── HEADING ── */
+h1 { font-family: 'Syne', sans-serif; font-size: clamp(28px, 5vw, 42px); font-weight: 800; line-height: 1.15; margin-bottom: 18px; }
+h2 { font-family: 'Syne', sans-serif; font-size: clamp(22px, 3.5vw, 30px); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+
+/* ── BODY TEXT ── */
+.guide { color: var(--dim); font-size: 15px; margin-bottom: 20px; line-height: 1.75; }
+.note {
+  font-size: 13px; font-style: italic;
+  color: var(--lavender);
+  padding: 10px 16px;
+  border-left: 2px solid rgba(223,111,247,0.35);
+  background: rgba(223,111,247,0.04);
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 18px;
+  display: none;
+}
+.note.visible { display: block; }
+
+/* ── TEXTAREA ── */
+textarea {
+  width: 100%; min-height: 110px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15px; line-height: 1.7;
+  padding: 14px 18px;
+  resize: vertical; outline: none;
+  transition: border-color .2s;
+}
+textarea:focus { border-color: var(--purple); }
+textarea::placeholder { color: rgba(138,127,175,0.35); }
+
+/* ── PATH CARDS ── */
+.path-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.pcard {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 22px;
+  cursor: pointer;
+  transition: all .18s;
+  background: var(--surface);
+  user-select: none;
+}
+.pcard:hover { border-color: rgba(123,102,255,.5); background: var(--surface2); }
+.pcard.on { border-color: var(--amber); background: rgba(247,171,3,.05); }
+.pcard-head { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--dim); margin-bottom: 5px; transition: color .18s; }
+.pcard.on .pcard-head { color: var(--amber); }
+.pcard-body { font-size: 14px; color: var(--dim); line-height: 1.5; }
+.pcard.on .pcard-body { color: var(--text); }
+
+/* ── NS TOOL ── */
+.ns {
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+}
+.ns.mint { background: rgba(31,231,183,.05); border: 1px solid rgba(31,231,183,.22); }
+.ns.violet { background: rgba(112,59,176,.1); border: 1px solid rgba(112,59,176,.28); }
+.ns-head {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.ns.mint .ns-head { color: var(--mint); }
+.ns.violet .ns-head { color: var(--lavender); }
+.ns p { font-size: 14px; color: var(--dim); line-height: 1.65; margin-bottom: 6px; }
+.ns p:last-child { margin-bottom: 0; }
+.ns strong { color: var(--text); font-weight: 600; }
+
+/* ── BREATH ANIMATOR ── */
+.breath-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; }
+.bcircle {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--mint);
+}
+.bcircle.box { animation: bBox 16s ease-in-out infinite; }
+.bcircle.f478 { animation: b478 19s ease-in-out infinite; }
+@keyframes bBox {
+  0%,6%   { transform: scale(.55); opacity: .35; }
+  25%     { transform: scale(1);   opacity: .8; }   /* in 4 */
+  50%     { transform: scale(1);   opacity: 1; }    /* hold 4 */
+  74%     { transform: scale(.55); opacity: .55; }  /* out 4 */
+  100%    { transform: scale(.55); opacity: .35; }  /* hold 4 */
+}
+@keyframes b478 {
+  0%,5%   { transform: scale(.55); opacity: .35; }
+  21%     { transform: scale(1);   opacity: .85; }  /* in 4 */
+  58%     { transform: scale(1);   opacity: 1; }    /* hold 7 */
+  100%    { transform: scale(.45); opacity: .25; }  /* out 8 */
+}
+.breath-label { font-size: 13px; color: var(--dim); }
+.breath-label strong { font-family: 'Syne', sans-serif; font-size: 11px; letter-spacing: .06em; color: var(--mint); display: block; margin-bottom: 3px; }
+
+/* ── RESOURCE TOGGLE ── */
+.rtoggle {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 14px;
+  background: transparent;
+  border: 1px solid rgba(112,59,176,.3);
+  border-radius: 20px; padding: 7px 16px;
+  color: var(--lavender);
+  font-family: 'Nunito Sans', sans-serif; font-size: 13px;
+  cursor: pointer; transition: all .18s;
+}
+.rtoggle:hover { border-color: var(--lavender); background: rgba(223,111,247,.05); }
+.rtoggle .ri { transition: transform .2s; font-style: normal; }
+.rtoggle.open .ri { transform: rotate(45deg); }
+
+/* ── RESOURCE PANEL ── */
+.rpanel {
+  display: none; margin-top: 14px;
+  background: var(--surface2);
+  border: 1px solid rgba(112,59,176,.25);
+  border-radius: 10px; padding: 18px 22px;
+  animation: rise .25s ease;
+}
+.rpanel.open { display: block; }
+.rpanel h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em;
+  color: var(--lavender); margin-bottom: 10px;
+}
+.rpanel p { font-size: 14px; color: var(--dim); line-height: 1.7; margin-bottom: 8px; }
+.rpanel p:last-child { margin-bottom: 0; }
+.rpanel a { color: var(--cyan); text-decoration: none; font-size: 13px; }
+.rpanel a:hover { text-decoration: underline; }
+.exbox {
+  margin-top: 12px; padding: 14px 16px;
+  background: rgba(247,171,3,.04);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+}
+.exbox p { color: var(--text); font-size: 14px; }
+
+/* ── BUTTONS ── */
+.btn-next {
+  margin-top: 28px;
+  background: var(--amber); color: var(--dark);
+  border: none; border-radius: 8px;
+  padding: 13px 32px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: .04em; cursor: pointer; transition: all .18s;
+}
+.btn-next:hover { background: #ffc124; transform: translateY(-1px); }
+
+/* ── REFLECTION ── */
+.rbox {
+  background: linear-gradient(135deg, rgba(112,59,176,.12), rgba(0,187,220,.06));
+  border: 1px solid rgba(123,102,255,.25);
+  border-radius: 14px; padding: 26px;
+  margin-bottom: 24px;
+}
+.rtext { font-size: 15px; line-height: 1.85; color: var(--text); white-space: pre-wrap; }
+.rloading { display: flex; align-items: center; gap: 12px; color: var(--dim); font-size: 14px; font-style: italic; }
+.dots { display: inline-flex; gap: 4px; }
+.dots span { width: 5px; height: 5px; background: var(--purple); border-radius: 50%; animation: dp 1.4s infinite; }
+.dots span:nth-child(2) { animation-delay: .18s; }
+.dots span:nth-child(3) { animation-delay: .36s; }
+@keyframes dp { 0%,80%,100%{opacity:.25;transform:scale(.7)} 40%{opacity:1;transform:scale(1)} }
+
+/* ── WITW CALLOUT ── */
+.witw {
+  border: 1px solid rgba(247,171,3,.2);
+  border-radius: 10px; padding: 18px 22px;
+  background: rgba(247,171,3,.03); margin-bottom: 24px;
+}
+.witw p { font-size: 14px; color: var(--dim); }
+.witw a { color: var(--amber); text-decoration: none; }
+.witw a:hover { text-decoration: underline; }
+
+/* ── CLOSING CARD ── */
+.closing {
+  background: var(--dpurple);
+  border-radius: 14px; padding: 30px;
+  margin-bottom: 28px;
+}
+.closing h2 { font-size: 24px; margin-bottom: 10px; }
+.closing p { color: rgba(255,255,255,.8); font-size: 15px; }
+.closing .sig { color: var(--amber); font-style: italic; margin-top: 14px; }
+
+/* ── SUMMARY ── */
+.summary {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px;
+  font-size: 13px; line-height: 1.75;
+  color: var(--dim); white-space: pre-wrap;
+  max-height: 260px; overflow-y: auto;
+  margin-bottom: 18px;
+}
+.btn-group { display: flex; flex-direction: column; gap: 10px; }
+.btn-email {
+  background: var(--dpurple); color: white;
+  border: none; border-radius: 8px;
+  padding: 13px 28px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; text-align: center;
+  text-decoration: none; transition: all .18s; display: block;
+}
+.btn-email:hover { background: #8a4fd4; transform: translateY(-1px); }
+.btn-copy {
+  background: transparent; color: var(--dim);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 11px 24px;
+  font-family: 'Syne', sans-serif; font-size: 13px;
+  cursor: pointer; transition: all .18s;
+}
+.btn-copy:hover { border-color: var(--mint); color: var(--mint); }
+
+.hr { height: 1px; background: var(--border); margin: 36px 0; }
+
+@media(max-width:600px) {
+  .wrap { padding: 16px 24px 100px; }
+  .site-header { padding: 20px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-fill" id="pf"></div></div>
+
+<header class="site-header">
+  <div class="dot"></div>
+  <span class="brand">Strategy for the Wired &amp; Wild</span>
+</header>
+
+<div class="wrap">
+
+<!-- ─── 0: OPENING ──────────────────────────────────────────────── -->
+<div class="sec active" id="s0">
+  <div class="sec-label">Before We Meet</div>
+  <h1>A few questions so we can make the most of our time.</h1>
+  <p class="guide">This is not a test. There are no right answers. Be as messy, uncertain, or honest as you want &mdash; that&rsquo;s the material we work with.</p>
+
+  <div class="ns mint">
+    <div class="ns-head">Start here &mdash; Box Breathing</div>
+    <p>This technique stabilizes your nervous system and sharpens focus. One round will make your answers better.</p>
+    <p><strong>Inhale 4 &rarr; Hold 4 &rarr; Exhale 4 &rarr; Hold 4</strong></p>
+    <div class="breath-row">
+      <div class="bcircle box"></div>
+      <div class="breath-label">
+        <strong>Watch the circle</strong>
+        Expand with it as you inhale. Hold. Release as it contracts. Hold. One round is enough.
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-next" onclick="go(1)">I&rsquo;m ready &rarr;</button>
+</div>
+
+<!-- ─── 1: THE FORK ─────────────────────────────────────────────── -->
+<div class="sec" id="s1">
+  <div class="sec-label">Let&rsquo;s Start Here</div>
+  <h2>Which of these sounds most like you right now?</h2>
+  <p class="guide">Choose whichever lands. There is no wrong answer.</p>
+
+  <div class="path-cards">
+    <div class="pcard" onclick="pickPath('A',this)">
+      <div class="pcard-head">A &mdash; I have something and I need help making it work.</div>
+      <div class="pcard-body">A business, a practice, an idea. You know what you&rsquo;re doing &mdash; it just isn&rsquo;t connecting. You want strategy.</div>
+    </div>
+    <div class="pcard" onclick="pickPath('B',this)">
+      <div class="pcard-head">B &mdash; I know I want something different. I&rsquo;m just not sure what yet.</div>
+      <div class="pcard-body">You want to build or be something other than this. The what is still fuzzy. You need space to find the thread.</div>
+    </div>
+    <div class="pcard" onclick="pickPath('C',this)">
+      <div class="pcard-head">C &mdash; I&rsquo;m exhausted. I just need someone to help me see straight.</div>
+      <div class="pcard-body">Everything is a lot. You need to figure out what actually matters before anything else.</div>
+    </div>
+    <div class="pcard" onclick="pickPath('mix',this)">
+      <div class="pcard-head">A mix &mdash; I&rsquo;ll explain in my answers.</div>
+      <div class="pcard-body">More than one of these is true right now.</div>
+    </div>
+  </div>
+
+  <textarea id="a0" rows="3" placeholder="A little more about where you are&hellip;"></textarea>
+  <button class="btn-next" onclick="go(2)">Continue &rarr;</button>
+</div>
+
+<!-- ─── 2: VISION ───────────────────────────────────────────────── -->
+<div class="sec" id="s2">
+  <div class="sec-label">What You&rsquo;re Moving Toward</div>
+
+  <div class="ns mint">
+    <div class="ns-head">4-7-8 Breath &mdash; before this section</div>
+    <p>This breath quiets the analytical brain and opens access to images and felt sense &mdash; which is exactly what this section is asking for.</p>
+    <p><strong>Inhale 4 &rarr; Hold 7 &rarr; Exhale slowly for 8</strong></p>
+    <div class="breath-row">
+      <div class="bcircle f478" style="background:var(--cyan)"></div>
+      <div class="breath-label" style="--mint:var(--cyan)">
+        <strong style="color:var(--cyan)">One round</strong>
+        Then close your eyes for ten seconds. Let the image come before the words do.
+      </div>
+    </div>
+  </div>
+
+  <div class="qnum">Question 1 of 12</div>
+  <h2>What does a really good Tuesday look like in two years?</h2>
+  <p class="guide">Not aspirational. Not perfect. Just: actually good. What time do you wake up? What are you doing? Who&rsquo;s around? How does your body feel?</p>
+  <div class="note" id="n1">If the image won&rsquo;t come: don&rsquo;t picture two years from now. Picture one perfect ordinary morning from your current life. What was different about it? Start there.</div>
+  <textarea id="a1" placeholder="Let the image come first, then write&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r1',this)"><span class="ri">+</span> This question feels hard</button>
+  <div class="rpanel" id="r1">
+    <h4>Perfect Day Prompt</h4>
+    <p>If the image won&rsquo;t come, try this: don&rsquo;t picture two years from now. Picture one perfect ordinary morning from your current life &mdash; a morning that felt right.</p>
+    <div class="exbox">
+      <p><strong>Finish these:</strong> &ldquo;The last time I woke up and felt genuinely okay, it was ___.&rdquo; / &ldquo;What made that morning different was ___.&rdquo; / &ldquo;The thing I was looking forward to that day was ___.&rdquo;</p>
+      <p style="margin-top:8px">That&rsquo;s your signal. That&rsquo;s the thing worth building toward.</p>
+    </div>
+  </div>
+
+  <div class="qnum">Question 2 of 12</div>
+  <h2>What are you building, offering, or exploring?</h2>
+  <p class="guide">Even if it&rsquo;s fuzzy. Even if it&rsquo;s three things. Even if you&rsquo;re not sure which one is real yet.</p>
+  <div class="note" id="n2">You don&rsquo;t need a business idea. What kinds of things light you up? What would you do if you knew it would work?</div>
+  <textarea id="a2" placeholder="Whatever&rsquo;s pulling at you right now&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r2',this)"><span class="ri">+</span> I genuinely don&rsquo;t know what I&rsquo;m building</button>
+  <div class="rpanel" id="r2">
+    <h4>Work in the Wild: Self-Assessment</h4>
+    <p>The Work in the Wild self-assessment is a good place to start. It identifies where you are across visibility, positioning, and what needs attention first.</p>
+    <p><a href="https://ko-fi.com/strategywiwa" target="_blank">Find it at ko-fi.com/strategywiwa &rarr;</a></p>
+    <div class="exbox">
+      <p><strong>Quick prompt:</strong> Forget the business. What would you be doing on a Tuesday in two years if money wasn&rsquo;t the question? Write that. That&rsquo;s closer to the actual answer.</p>
+    </div>
+  </div>
+
+  <div class="qnum">Question 3 of 12</div>
+  <h2>What do people come to you for &mdash; even when you haven&rsquo;t offered it?</h2>
+  <p class="guide">The thing friends ask your opinion on. The problem that lands in your lap at parties. The thing you find yourself explaining or helping with, unpaid and unbidden.</p>
+  <div class="note" id="n3">This question is often where the thread lives. People who don&rsquo;t know what they want to build almost always already know how to help &mdash; they just haven&rsquo;t named it yet.</div>
+  <textarea id="a3" placeholder="The thing people always seem to bring to you&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r3',this)"><span class="ri">+</span> I&rsquo;m not sure / no one&rsquo;s ever asked me this</button>
+  <div class="rpanel" id="r3">
+    <h4>Strengths Inventory Exercise</h4>
+    <p>Most people&rsquo;s real strengths are invisible to them because they feel effortless. That ease is not a sign they don&rsquo;t matter. It&rsquo;s a sign you&rsquo;ve internalized something most people haven&rsquo;t.</p>
+    <div class="exbox">
+      <p><strong>Try this:</strong> Name three times in the last year when someone thanked you and meant it. What were you actually doing for them? What specifically did they say?</p>
+      <p style="margin-top:8px">Write those three moments. The pattern across them is usually the thread.</p>
+    </div>
+    <p style="margin-top:14px">Also: the Red/Green Energy Audit in <a href="https://ko-fi.com/strategywiwa" target="_blank">Work in the Wild</a> is a 3-day exercise that tracks what charges vs. drains you. The green things are almost always adjacent to the answer.</p>
+  </div>
+
+  <button class="btn-next" onclick="go(3)" style="margin-top:32px">Continue &rarr;</button>
+</div>
+
+<!-- ─── 3: WHAT'S ALREADY TRUE ──────────────────────────────────── -->
+<div class="sec" id="s3">
+  <div class="sec-label">What&rsquo;s Already True</div>
+
+  <div class="qnum">Question 4 of 12</div>
+  <h2>What&rsquo;s working? What have you built, created, or figured out so far?</h2>
+  <p class="guide">This can be tiny. A system. A client you loved. A piece of content that landed. Knowing what you don&rsquo;t want. All of it counts.</p>
+  <div class="note" id="n4">This might be skills from your job, relationships you&rsquo;ve built, ways you show up that people notice. Things you&rsquo;re quietly proud of even if they don&rsquo;t feel like business assets yet.</div>
+  <textarea id="a4" placeholder="Even the small things. Especially the small things."></textarea>
+  <button class="rtoggle" onclick="rt('r4',this)"><span class="ri">+</span> Nothing feels like it&rsquo;s working</button>
+  <div class="rpanel" id="r4">
+    <h4>The Invisible Asset Inventory</h4>
+    <p>When nothing feels like it&rsquo;s working, it&rsquo;s usually because the real assets aren&rsquo;t visible yet &mdash; not because they don&rsquo;t exist.</p>
+    <div class="exbox">
+      <p><strong>List 10 things</strong> you&rsquo;ve done in the last 12 months that you&rsquo;re quietly proud of. Not big wins. Things you figured out, things that were harder than they looked, things you survived.</p>
+      <p style="margin-top:8px">At least three of those are business assets. Write them and we&rsquo;ll figure out which ones in session.</p>
+    </div>
+  </div>
+
+  <div class="qnum">Question 5 of 12</div>
+  <h2>What&rsquo;s not working? What have you tried that hasn&rsquo;t moved things?</h2>
+  <p class="guide">Include everything &mdash; courses, coaches, programs. If you&rsquo;ve invested in something that didn&rsquo;t land, I want to know. It tells me a lot about where you actually are.</p>
+  <textarea id="a5" placeholder="Courses, coaches, strategies, things you&rsquo;ve tried&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r5',this)"><span class="ri">+</span> I feel like I&rsquo;ve wasted a lot of time or money</button>
+  <div class="rpanel" id="r5">
+    <h4>On Misaligned Investment</h4>
+    <p>If things didn&rsquo;t work, the problem is almost never you. It&rsquo;s usually a mismatch between what was offered and where you actually were.</p>
+    <div class="exbox">
+      <p><strong>For each thing that didn&rsquo;t work:</strong> What did you go in hoping to get? What did you actually get? That gap is often the clearest signal of what you actually need. Write it above &mdash; it tells me more than the list of what you tried.</p>
+    </div>
+  </div>
+
+  <div class="qnum">Question 6 of 12</div>
+  <h2>What are you walking away from &mdash; and what made it wrong?</h2>
+  <p class="guide">Most people arrive at this work in the middle of a transition. There&rsquo;s often grief in that &mdash; even when the thing wasn&rsquo;t right, even when leaving was your choice. Knowing what you&rsquo;re done with helps us build something that doesn&rsquo;t recreate it.</p>
+  <textarea id="a6" placeholder="What you&rsquo;re done with, and what specifically made it wrong&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r6',this)"><span class="ri">+</span> This one feels complicated / I haven&rsquo;t fully left yet</button>
+  <div class="rpanel" id="r6">
+    <h4>On Transition and Identity Loss</h4>
+    <p>What you&rsquo;re feeling &mdash; the fog, the confusion, the grief that doesn&rsquo;t quite make sense because you chose this &mdash; is a documented experience. Herminia Ibarra&rsquo;s research on career reinvention describes it: &ldquo;Change always takes longer than we expect because to make room for the new, we have to get rid of some of the old selves we are still dragging around.&rdquo;</p>
+    <p>The confusion is not a sign you&rsquo;re doing it wrong. It&rsquo;s a sign you&rsquo;re doing something real.</p>
+    <div class="exbox">
+      <p>You don&rsquo;t have to have left yet. Just write what you know you&rsquo;re done with. That clarity is the starting point, not the finish line.</p>
+    </div>
+  </div>
+
+  <button class="btn-next" onclick="go(4)" style="margin-top:32px">Continue &rarr;</button>
+</div>
+
+<!-- ─── 4: WHO + PROTECTS ────────────────────────────────────────── -->
+<div class="sec" id="s4">
+  <div class="sec-label">Who You Want to Help and What You&rsquo;re Protecting</div>
+
+  <div class="ns violet">
+    <div class="ns-head">Reset &mdash; Box Breathing</div>
+    <p>Good place to pause. In for 4, hold for 4, out for 4, hold for 4. One round is enough. Then keep going.</p>
+  </div>
+
+  <div class="qnum">Question 7 of 12</div>
+  <h2>Who do you want to help? Even a fuzzy answer is useful.</h2>
+  <p class="guide">A type of person. An industry. A life stage. A feeling someone is in when they come to you. You don&rsquo;t need a niche statement &mdash; just a direction.</p>
+  <div class="note" id="n7">&ldquo;Honestly, people like me&rdquo; is a completely valid starting answer.</div>
+  <textarea id="a7" placeholder="Who you find yourself wanting to be in the room with&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r7',this)"><span class="ri">+</span> I have no idea who I want to work with</button>
+  <div class="rpanel" id="r7">
+    <h4>Three Ways to Find Your Audience</h4>
+    <p>Your nervous system often knows before your brain does.</p>
+    <div class="exbox">
+      <p><strong>The coffee test:</strong> Who would you have coffee with for free, just because the conversation would be interesting? What are they working on or struggling with?</p>
+      <p style="margin-top:8px"><strong>The protection test:</strong> Who do you find yourself defending when other people don&rsquo;t get them? That protectiveness usually points at your audience.</p>
+      <p style="margin-top:8px"><strong>The mirror test:</strong> Who were you three years ago, before you figured something out? The person you were before is often exactly who you&rsquo;re meant to serve.</p>
+    </div>
+  </div>
+
+  <div class="qnum">Question 8 of 12</div>
+  <h2>What do you absolutely not want to do, even if it &lsquo;works&rsquo; for other people?</h2>
+  <p class="guide">No videos? No cold DMs? Weekends protected? Build the edges before you build the structure.</p>
+  <textarea id="a8" placeholder="The things you know you won&rsquo;t do&hellip;"></textarea>
+
+  <div class="qnum">Question 9 of 12</div>
+  <h2>What does your energy look like on a real week?</h2>
+  <p class="guide">How many hours can you give to building right now? What time of day do you work best? What do you need around you to think clearly?</p>
+  <textarea id="a9" placeholder="Your honest capacity right now&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r9',this)"><span class="ri">+</span> My energy is all over the place</button>
+  <div class="rpanel" id="r9">
+    <h4>Capacity Audit</h4>
+    <p>Irregular energy isn&rsquo;t a problem to fix before you start. It&rsquo;s a constraint to design around. Every plan we build needs to fit your actual capacity, not an imaginary version of you who has it together.</p>
+    <div class="exbox">
+      <p><strong>Quick map:</strong> Rate your typical energy in each part of the day (morning / afternoon / evening) 1&ndash;3. Then: what are the 2&ndash;3 hours per week where you&rsquo;re most likely to be sharp? That&rsquo;s your building window. Write it above. We&rsquo;ll design your plan around it.</p>
+    </div>
+  </div>
+
+  <button class="btn-next" onclick="go(5)" style="margin-top:32px">Continue &rarr;</button>
+</div>
+
+<!-- ─── 5: THE CLICK ─────────────────────────────────────────────── -->
+<div class="sec" id="s5">
+  <div class="sec-label">The Click You&rsquo;re Looking For</div>
+
+  <div class="qnum">Question 10 of 12</div>
+  <h2>If one thing got clearer in our conversation, what would it be?</h2>
+  <p class="guide">This is your win condition. Orient around it and the whole session earns itself.</p>
+  <textarea id="a10" placeholder="The thing you want to stop going in circles on&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r10',this)"><span class="ri">+</span> I don&rsquo;t even know what I need</button>
+  <div class="rpanel" id="r10">
+    <h4>The Magic Wand Prompt</h4>
+    <div class="exbox">
+      <p><strong>Finish this:</strong> &ldquo;If I woke up tomorrow and one thing had magically resolved itself, it would be ___.&rdquo;</p>
+      <p style="margin-top:8px">Don&rsquo;t overthink it. The first thing that came to mind before you could edit it &mdash; that&rsquo;s usually the real answer.</p>
+    </div>
+  </div>
+
+  <button class="btn-next" onclick="go(6)" style="margin-top:32px">Continue &rarr;</button>
+</div>
+
+<!-- ─── 6: FINANCIAL ─────────────────────────────────────────────── -->
+<div class="sec" id="s6">
+  <div class="sec-label">The Financial Picture</div>
+
+  <div class="qnum">Question 11 of 12</div>
+  <h2>What does this need to do for you, financially?</h2>
+  <p class="guide">Not your bank balance. Just: what are we solving for?</p>
+  <textarea id="a11" placeholder="What progress would feel like, financially&hellip;"></textarea>
+  <button class="rtoggle" onclick="rt('r11',this)"><span class="ri">+</span> This question made my stomach do something</button>
+  <div class="rpanel" id="r11">
+    <h4>On Money and What You&rsquo;re Allowed to Want</h4>
+    <p>That stomach response is useful information, not a problem to fix. Most people &mdash; especially people who care deeply about the work &mdash; have a complicated relationship with charging for it. The Trauma of Money framework names this well: our money stories are often inherited, not chosen.</p>
+    <div class="exbox">
+      <p><strong>One question:</strong> If you knew the number you wanted was completely reasonable and you were allowed to want it &mdash; what would it be? You don&rsquo;t have to share it. Just let yourself know it. Then write whatever you&rsquo;re comfortable with above.</p>
+    </div>
+  </div>
+
+  <button class="btn-next" onclick="go(7)" style="margin-top:32px">Continue &rarr;</button>
+</div>
+
+<!-- ─── 7: ANYTHING ELSE ──────────────────────────────────────────── -->
+<div class="sec" id="s7">
+  <div class="sec-label">Anything Else?</div>
+
+  <div class="qnum">Question 12 of 12</div>
+  <h2>What else would help me understand you or your situation?</h2>
+  <p class="guide">Life stuff, brain stuff, past experiences, fears, context. Whatever feels relevant.</p>
+  <textarea id="a12" placeholder="Anything that didn&rsquo;t fit above &mdash; or anything this form already cracked open&hellip;" rows="5"></textarea>
+
+  <button class="btn-next" onclick="go(8)" style="margin-top:32px">See what I&rsquo;m seeing &rarr;</button>
+</div>
+
+<!-- ─── 8: REFLECTION ─────────────────────────────────────────────── -->
+<div class="sec" id="s8">
+  <div class="sec-label">A Reflection</div>
+  <h2>Here&rsquo;s what I&rsquo;m seeing in your answers.</h2>
+  <p class="guide" style="margin-bottom:22px">A preliminary read based on what you&rsquo;ve shared. Not a diagnosis &mdash; a starting point.</p>
+
+  <div class="rbox" id="rbox">
+    <div class="rloading">
+      <div class="dots"><span></span><span></span><span></span></div>
+      Reading your answers&hellip;
+    </div>
+  </div>
+
+  <div class="witw">
+    <p>Want to explore more before we meet? <strong>Work in the Wild</strong> is a free, open-source visibility and strategy resource with a self-assessment you can use today. <a href="https://ko-fi.com/strategywiwa" target="_blank">ko-fi.com/strategywiwa &rarr;</a></p>
+  </div>
+
+  <button class="btn-next" onclick="go(9)">Send this to Dani &rarr;</button>
+</div>
+
+<!-- ─── 9: SUBMIT ─────────────────────────────────────────────────── -->
+<div class="sec" id="s9">
+  <div class="closing">
+    <h2>You did the work.</h2>
+    <p>Getting honest about where you are is the first move. Most people skip it.</p>
+    <p class="sig">I&rsquo;ll read your answers and reach out with what I see. No pitch. Just a conversation. &mdash; Dani</p>
+  </div>
+
+  <div class="hr"></div>
+  <p style="font-size:14px;color:var(--dim);margin-bottom:14px">Your answers are summarized below. Send them to Dani or copy them for your own records.</p>
+  <div class="summary" id="sumBox"></div>
+  <div class="btn-group">
+    <a id="mailBtn" href="#" class="btn-email">Send to Dani &rarr;</a>
+    <button class="btn-copy" onclick="doCopy()">Copy my answers</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+let path = '';
+let cur = 0;
+const TOTAL = 10;
+
+function go(n) {
+  document.getElementById('s'+cur).classList.remove('active');
+  cur = n;
+  document.getElementById('s'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('pf').style.width = ((cur/(TOTAL-1))*100)+'%';
+  if (n===8) doReflection();
+  if (n===9) buildSubmit();
+}
+
+function pickPath(p, el) {
+  path = p;
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  const bc = p==='B'||p==='C'||p==='mix';
+  if (bc) {
+    show('n1'); show('n2'); show('n3'); show('n4'); show('n7');
+  }
+}
+
+function show(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.add('visible');
+}
+
+function rt(id, btn) {
+  const p = document.getElementById(id);
+  p.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function allAnswers() {
+  return {
+    path, pathDetail: val('a0'),
+    q1:val('a1'), q2:val('a2'), q3:val('a3'),
+    q4:val('a4'), q5:val('a5'), q6:val('a6'),
+    q7:val('a7'), q8:val('a8'), q9:val('a9'),
+    q10:val('a10'), q11:val('a11'), q12:val('a12')
+  };
+}
+
+async function doReflection() {
+  const a = allAnswers();
+  const prompt = `You are an organizational design expert and strengths coach with deep expertise in neurodivergent entrepreneurs, career transitions, and small business strategy. You have a direct, warm, honest voice. You do not flatter, but you see clearly.
+
+A person has completed a strategy intake form. Their answers:
+
+PATH: ${a.path || 'not selected'}
+Path detail: ${a.pathDetail || '(none)'}
+1. Ideal Tuesday in 2 years: ${a.q1 || '(skipped)'}
+2. What they are building: ${a.q2 || '(skipped)'}
+3. What people come to them for uninvited: ${a.q3 || '(skipped)'}
+4. What is working: ${a.q4 || '(skipped)'}
+5. What has not worked: ${a.q5 || '(skipped)'}
+6. What they are walking away from: ${a.q6 || '(skipped)'}
+7. Who they want to help: ${a.q7 || '(skipped)'}
+8. What they will not do: ${a.q8 || '(skipped)'}
+9. Energy and capacity: ${a.q9 || '(skipped)'}
+10. Win condition: ${a.q10 || '(skipped)'}
+11. Financial picture: ${a.q11 || '(skipped)'}
+12. Anything else: ${a.q12 || '(skipped)'}
+
+Write 3-4 short paragraphs that:
+1. Name what you actually see: their apparent strengths and capacities, including things they may not be naming as strengths themselves
+2. Surface any thread or pattern running through their answers that they may not see yet
+3. Name one honest tension or blind spot -- directly but with care, as something worth knowing rather than a problem to fix
+4. End with one sentence that makes them want to have the conversation
+
+Rules: no bullet points, no headers, no corporate or therapy language, no flattery, no vague positivity, do not use the word journey. Write like a thoughtful person who has read carefully and is saying what they actually see.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const d = await res.json();
+    const txt = d.content?.[0]?.text || 'The reflection could not load. Your answers are saved -- Dani will read them directly.';
+    document.getElementById('rbox').innerHTML = '<div class="rtext">'+txt.replace(/\n/g,'<br>')+'</div>';
+  } catch(e) {
+    document.getElementById('rbox').innerHTML = '<div class="rtext" style="color:var(--dim)">The reflection could not load right now. Your answers are saved -- scroll down to send them to Dani directly.</div>';
+  }
+}
+
+function buildSubmit() {
+  const a = allAnswers();
+  const lines = [
+    'BEFORE WE MEET — Strategy for the Wired & Wild',
+    'Completed: ' + new Date().toLocaleDateString('en-CA'),
+    '',
+    'PATH: ' + (a.path || 'not selected'),
+    a.pathDetail ? 'More: ' + a.pathDetail : '',
+    '',
+    '1. IDEAL TUESDAY (2 years)',
+    a.q1 || '(skipped)',
+    '',
+    '2. WHAT THEY\'RE BUILDING',
+    a.q2 || '(skipped)',
+    '',
+    '3. WHAT PEOPLE COME TO THEM FOR',
+    a.q3 || '(skipped)',
+    '',
+    '4. WHAT\'S WORKING',
+    a.q4 || '(skipped)',
+    '',
+    '5. WHAT\'S NOT WORKING / TRIED',
+    a.q5 || '(skipped)',
+    '',
+    '6. WALKING AWAY FROM',
+    a.q6 || '(skipped)',
+    '',
+    '7. WHO THEY WANT TO HELP',
+    a.q7 || '(skipped)',
+    '',
+    '8. WON\'T DO',
+    a.q8 || '(skipped)',
+    '',
+    '9. ENERGY & CAPACITY',
+    a.q9 || '(skipped)',
+    '',
+    '10. WIN CONDITION',
+    a.q10 || '(skipped)',
+    '',
+    '11. FINANCIAL PICTURE',
+    a.q11 || '(skipped)',
+    '',
+    '12. ANYTHING ELSE',
+    a.q12 || '(skipped)'
+  ].filter(l => l !== '').join('\n');
+
+  document.getElementById('sumBox').textContent = lines;
+  const sub = encodeURIComponent('Before We Meet — Intake Form');
+  const bod = encodeURIComponent(lines);
+  document.getElementById('mailBtn').href = 'mailto:[VERIFY_DANI_EMAIL]?subject='+sub+'&body='+bod;
+}
+
+function doCopy() {
+  const txt = document.getElementById('sumBox').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const b = document.querySelector('.btn-copy');
+    b.textContent = 'Copied.';
+    setTimeout(()=>b.textContent='Copy my answers', 2000);
+  });
+}
+</script>
+</body>
+</html>
