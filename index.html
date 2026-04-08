@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before We Meet — Strategy for the Wired & Wild</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;1,6..12,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   COLOR THEORY / NS NOTES
+   ───────────────────────────────────────────────────────
+   Base cream (#FBF7F0): warm, open, safe. Reduces 
+   visual cortisol response vs stark white or dark.
+   Deep purple headers: grounding authority without
+   aggression. Amber accents: warmth, forward motion.
+   Mint for breathing/NS moments: parasympathetic 
+   activation, calm without sleepy.
+   No red, no high-contrast flashing, no sharp edges.
+   Rounded corners throughout = perceived safety.
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  --amber: #F7AB03;
+  --amber-soft: #FFF4D9;
+  --amber-mid: #FFE49A;
+  --cyan: #00BBDC;
+  --purple: #7B66FF;
+  --purple-soft: #EEEAFF;
+  --magenta: #E93EFB;
+  --lavender: #F3EEFF;
+  --dpurple: #703BB0;
+  --mint: #1FE7B7;
+  --mint-soft: #E2FBF3;
+  --cream: #FBF7F0;
+  --warm-white: #FFFCF7;
+  --text: #2D2A3E;
+  --text-mid: #5C5477;
+  --text-dim: #8E86A8;
+  --surface: #F5F0EA;
+  --surface2: #EDE7DF;
+  --border: rgba(112,59,176,0.12);
+  --border-light: rgba(112,59,176,0.06);
+  --shadow: rgba(45,42,62,0.06);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 16.5px;
+  line-height: 1.75;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PROGRESS ── */
+.progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 4px; background: var(--surface2); z-index: 200;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--amber), var(--mint));
+  transition: width 0.6s cubic-bezier(.4,0,.2,1);
+  width: 0%;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ── HEADER ── */
+.site-header {
+  padding: 24px 48px;
+  display: flex; align-items: center; gap: 10px;
+  position: sticky; top: 0;
+  background: linear-gradient(to bottom, var(--cream) 70%, transparent);
+  z-index: 100;
+}
+.dot { width: 7px; height: 7px; background: var(--amber); border-radius: 50%; flex-shrink: 0; }
+.brand {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--dpurple);
+}
+
+/* ── LAYOUT ── */
+.wrap {
+  max-width: 640px; margin: 0 auto;
+  padding: 20px 32px 120px;
+}
+
+/* ── SECTIONS ── */
+.sec {
+  display: none;
+  animation: fadeUp 0.5s ease both;
+}
+.sec.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sec-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dpurple); opacity: 0.6;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 30px; font-weight: 800;
+  line-height: 1.25; color: var(--dpurple);
+  margin-bottom: 16px;
+}
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px; font-weight: 700;
+  line-height: 1.3; color: var(--text);
+  margin-bottom: 10px;
+}
+
+.guide {
+  color: var(--text-mid); font-size: 15.5px;
+  margin-bottom: 20px; line-height: 1.7;
+}
+
+.qnum {
+  font-size: 12px; color: var(--text-dim);
+  font-weight: 600; letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+/* ── INPUTS ── */
+textarea, input[type="text"], input[type="email"] {
+  width: 100%; padding: 16px 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  background: var(--warm-white);
+  color: var(--text);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 15.5px; line-height: 1.65;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical;
+}
+textarea:focus, input[type="text"]:focus, input[type="email"]:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(123,102,255,0.1);
+}
+textarea::placeholder, input::placeholder {
+  color: var(--text-dim); font-style: italic;
+}
+
+.required-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 700;
+  color: var(--dpurple); 
+  background: var(--purple-soft);
+  padding: 2px 8px; border-radius: 4px;
+  margin-bottom: 8px; letter-spacing: 0.03em;
+}
+
+/* ── BUTTONS ── */
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 13px 28px;
+  border: none; border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-next {
+  background: var(--dpurple); color: white;
+}
+.btn-next:hover { background: #8a4fd4; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(112,59,176,0.2); }
+
+.btn-back {
+  background: transparent; color: var(--text-dim);
+  border: 1.5px solid var(--border);
+  margin-right: 10px;
+}
+.btn-back:hover { border-color: var(--dpurple); color: var(--dpurple); }
+
+.nav-row {
+  display: flex; align-items: center;
+  margin-top: 32px; gap: 10px;
+}
+
+/* ── PATH CARDS ── */
+.paths { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.pcard {
+  border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 20px 22px;
+  cursor: pointer; transition: all 0.2s;
+  background: var(--warm-white);
+}
+.pcard:hover { border-color: var(--purple); box-shadow: 0 2px 12px var(--shadow); }
+.pcard.on {
+  border-color: var(--dpurple);
+  background: var(--lavender);
+  box-shadow: 0 2px 16px rgba(112,59,176,0.1);
+}
+.pcard strong {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; color: var(--dpurple);
+  display: block; margin-bottom: 4px;
+}
+.pcard span { font-size: 14px; color: var(--text-mid); }
+
+/* ── NS TOOLS ── */
+.ns {
+  border-radius: 12px; padding: 22px 24px;
+  margin: 24px 0;
+}
+.ns.mint { background: var(--mint-soft); border: 1px solid rgba(31,231,183,0.2); }
+.ns.amber { background: var(--amber-soft); border: 1px solid rgba(247,171,3,0.2); }
+.ns-head {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--dpurple); margin-bottom: 8px;
+}
+.ns p { font-size: 14.5px; color: var(--text-mid); }
+.ns strong { color: var(--text); }
+
+/* ── BREATHING ── */
+.breath-row { display: flex; align-items: center; gap: 20px; margin-top: 16px; }
+.bcircle {
+  width: 56px; height: 56px;
+  border-radius: 50%; flex-shrink: 0;
+}
+.bcircle.box {
+  background: rgba(31,231,183,0.25);
+  border: 2px solid var(--mint);
+  animation: boxBreathe 16s ease-in-out infinite;
+}
+.bcircle.calm {
+  background: rgba(247,171,3,0.2);
+  border: 2px solid var(--amber);
+  animation: calmBreathe 19s ease-in-out infinite;
+}
+@keyframes boxBreathe {
+  0%,100% { transform: scale(0.7); opacity: 0.5; }
+  12.5% { transform: scale(1); opacity: 1; }
+  25% { transform: scale(1); opacity: 1; }
+  37.5% { transform: scale(0.7); opacity: 0.5; }
+  50% { transform: scale(0.7); opacity: 0.5; }
+  62.5% { transform: scale(1); opacity: 1; }
+  75% { transform: scale(1); opacity: 1; }
+  87.5% { transform: scale(0.7); opacity: 0.5; }
+}
+@keyframes calmBreathe {
+  0%,100% { transform: scale(0.65); opacity: 0.4; }
+  21% { transform: scale(1); opacity: 1; }
+  58% { transform: scale(0.65); opacity: 0.4; }
+}
+.breath-label { font-size: 13.5px; color: var(--text-mid); line-height: 1.5; }
+.breath-label strong { display: block; color: var(--text); font-size: 14px; }
+
+/* ── RESOURCE TOGGLES ── */
+.rt-btn {
+  background: none; border: none;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px; color: var(--dpurple);
+  cursor: pointer; padding: 8px 0;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.2s; margin-top: 12px;
+  font-weight: 600;
+}
+.rt-btn:hover { color: var(--purple); }
+.rt-btn::before {
+  content: '+'; display: inline-flex;
+  width: 20px; height: 20px;
+  align-items: center; justify-content: center;
+  border-radius: 50%; font-size: 14px; font-weight: 700;
+  background: var(--purple-soft); color: var(--dpurple);
+  transition: transform 0.3s;
+}
+.rt-btn.open::before { transform: rotate(45deg); }
+
+.rpanel {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 0 20px;
+  margin-top: 8px;
+}
+.rpanel.open {
+  max-height: 600px;
+  padding: 20px;
+}
+.rpanel p { font-size: 14.5px; color: var(--text-mid); margin-bottom: 10px; }
+.rpanel strong { color: var(--text); }
+
+.exbox {
+  background: var(--warm-white);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px; margin: 12px 0;
+}
+.exbox p { font-size: 14px; color: var(--text); margin: 0; }
+
+/* ── PATH-CONDITIONAL NOTES ── */
+.pnote {
+  display: none;
+  font-size: 14px; color: var(--dpurple);
+  background: var(--lavender);
+  border-radius: 8px; padding: 12px 16px;
+  margin-bottom: 16px; line-height: 1.6;
+}
+.pnote.visible { display: block; animation: fadeUp 0.3s ease; }
+
+/* ── WITW CALLOUT ── */
+.witw {
+  border: 1px solid rgba(247,171,3,0.2);
+  border-radius: 10px; padding: 18px 22px;
+  background: var(--amber-soft); margin: 20px 0;
+}
+.witw p { font-size: 14px; color: var(--text-mid); }
+/* ──────────────────────────────────────────────────────
+   CHANGE YOUR LINK HERE: Update the href below if your
+   Work in the Wild URL changes.
+   ────────────────────────────────────────────────────── */
+.witw a { color: var(--dpurple); text-decoration: none; font-weight: 600; }
+.witw a:hover { text-decoration: underline; }
+
+/* ── CLOSING CARD ── */
+.closing {
+  background: linear-gradient(135deg, var(--lavender), var(--amber-soft));
+  border-radius: 14px; padding: 30px;
+  margin-bottom: 24px;
+}
+.closing h2 { color: var(--dpurple); font-size: 24px; margin-bottom: 10px; }
+.closing p { color: var(--text-mid); font-size: 15px; }
+.closing .sig { color: var(--dpurple); font-style: italic; margin-top: 14px; font-weight: 600; }
+
+/* ── REFLECTION BOX ── */
+.rbox {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 24px;
+  margin-bottom: 24px; min-height: 120px;
+  font-size: 15px; line-height: 1.75;
+  color: var(--text);
+}
+.rloading {
+  display: flex; align-items: center; gap: 12px;
+  color: var(--text-dim); font-size: 14px;
+}
+.dots span {
+  display: inline-block; width: 6px; height: 6px;
+  background: var(--dpurple); border-radius: 50%;
+  animation: pulse 1.2s ease-in-out infinite;
+  margin-right: 3px;
+}
+.dots span:nth-child(2) { animation-delay: 0.15s; }
+.dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes pulse { 0%,100%{opacity:0.2;transform:scale(0.7)} 40%{opacity:1;transform:scale(1)} }
+
+/* ── SUMMARY ── */
+.summary {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 20px;
+  font-size: 13.5px; line-height: 1.75;
+  color: var(--text-mid); white-space: pre-wrap;
+  max-height: 260px; overflow-y: auto;
+  margin-bottom: 18px;
+}
+.btn-group { display: flex; flex-direction: column; gap: 10px; }
+.btn-email {
+  background: var(--dpurple); color: white;
+  border: none; border-radius: 10px;
+  padding: 14px 28px;
+  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; text-align: center;
+  text-decoration: none; transition: all 0.2s; display: block;
+}
+.btn-email:hover { background: #8a4fd4; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(112,59,176,0.2); }
+.btn-copy {
+  background: transparent; color: var(--text-dim);
+  border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Syne', sans-serif; font-size: 13px;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-copy:hover { border-color: var(--dpurple); color: var(--dpurple); }
+
+.hr { height: 1px; background: var(--border); margin: 28px 0; }
+
+.saved-notice {
+  position: fixed; bottom: 20px; right: 20px;
+  background: var(--dpurple); color: white;
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 8px 16px; border-radius: 8px;
+  opacity: 0; transition: opacity 0.3s;
+  pointer-events: none; z-index: 300;
+}
+.saved-notice.show { opacity: 1; }
+
+/* ── PREAMBLE EXTRAS ── */
+.preamble-detail {
+  background: var(--warm-white);
+  border: 1.5px solid var(--border-light);
+  border-radius: 12px; padding: 20px 24px;
+  margin: 16px 0;
+}
+.preamble-detail p { font-size: 14.5px; color: var(--text-mid); margin-bottom: 6px; }
+.preamble-detail strong { color: var(--text); }
+
+.email-error {
+  color: #c0392b; font-size: 13px;
+  margin-top: 6px; display: none;
+}
+.email-error.show { display: block; }
+
+@media(max-width:600px) {
+  .wrap { padding: 16px 22px 100px; }
+  .site-header { padding: 18px 22px; }
+  h1 { font-size: 25px; }
+  .nav-row { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="progress-fill" id="pf"></div></div>
+<div class="saved-notice" id="savedNote">Answers saved</div>
+
+<header class="site-header">
+  <div class="dot"></div>
+  <span class="brand">Strategy for the Wired & Wild</span>
+</header>
+
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 0: PREAMBLE
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec active" id="s0">
+  <div class="sec-label">Welcome</div>
+  <h1>Before We Meet</h1>
+
+  <p class="guide">Hi. I'm Dani. This is not a test, and there are no wrong answers. Truly. You can be messy, half-formed, contradictory, and uncertain in here. That's the good stuff. That's what I work with.</p>
+
+  <p class="guide">I built this form because I want our first conversation to be useful from the first minute (not spent on logistics or backstory you could have told me in advance). Your answers help me see you more clearly before we sit down together.</p>
+
+  <div class="preamble-detail">
+    <p><strong>How long will this take?</strong> Somewhere between 15 and 45 minutes, depending on how deep you want to go. Some people breeze through. Some people have revelations. Both are fine.</p>
+    <p><strong>What happens with your answers?</strong> They go directly to me (Dani) via email. Nobody else sees them. I read every word, and I come to our session with a preliminary read already forming.</p>
+    <p><strong>Can I come back to it?</strong> Yes. Your answers save automatically in your browser. Close the tab, come back later, everything will still be here.</p>
+    <p><strong>Do I have to answer everything?</strong> The only required field is your email (so I can reach you). Everything else is optional. But the more honest material you give me, the more useful our conversation will be.</p>
+  </div>
+
+  <p class="guide">There are some breathing tools built into this form. They are not decorative. They are here because your nervous system affects the quality of your thinking, and I want you thinking clearly. Use them or skip them, your call.</p>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-next" onclick="go(1)">Let's go</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 1: EMAIL + NAME
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s1">
+  <div class="sec-label">The Basics</div>
+  <h2>First, how do I find you?</h2>
+
+  <p class="guide">I need your email so I can actually respond to what you share here. Your name is so I don't call you "hey you" in our session (unless that's your preference, in which case, noted).</p>
+
+  <div class="required-label">Required</div>
+  <label style="display:block;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Your email address</label>
+  <input type="email" id="aEmail" placeholder="the one you actually check" />
+  <div class="email-error" id="emailErr">I need your email to send your answers back to you. Pop it in above.</div>
+
+  <div style="margin-top:20px;">
+    <label style="display:block;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Your name (whatever you want me to call you)</label>
+    <input type="text" id="aName" placeholder="First name, full name, nickname, stage name, all good" />
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(0)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="goWithEmailCheck(2)">Continue &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 2: BOX BREATHING + PATH SELECTION
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s2">
+  <div class="sec-label">Before We Dive In</div>
+  <h1>One breath first.</h1>
+
+  <div class="ns mint">
+    <div class="ns-head">Box Breathing (this will make your answers better)</div>
+    <p>This is not woo. It stabilizes your nervous system and sharpens focus. Takes 30 seconds and you will genuinely think more clearly after. One round.</p>
+    <p><strong>Inhale 4 counts, Hold 4, Exhale 4, Hold 4.</strong></p>
+    <div class="breath-row">
+      <div class="bcircle box"></div>
+      <div class="breath-label">
+        <strong>Breathe with the circle.</strong>
+        Expand as it grows. Hold when it pauses. Release as it shrinks.
+      </div>
+    </div>
+  </div>
+
+  <h2>Where are you starting from?</h2>
+  <p class="guide">Pick whichever sounds most like you right now. This just helps me calibrate the questions and resources that show up as you go.</p>
+
+  <div class="paths">
+    <div class="pcard" onclick="pickPath('A',this)">
+      <strong>I have a thing and I want to grow it.</strong>
+      <span>You have a business, a practice, a creative body of work. It exists. Now you want to make it more visible, more sustainable, or both.</span>
+    </div>
+    <div class="pcard" onclick="pickPath('B',this)">
+      <strong>I want something different and I'm not sure what yet.</strong>
+      <span>You know you want a change. You might have skills, ideas, maybe even a side project. But the shape of the thing isn't clear.</span>
+    </div>
+    <div class="pcard" onclick="pickPath('C',this)">
+      <strong>I'm exhausted and I need to figure out what's next.</strong>
+      <span>You're coming out of something (a job, a burnout, a life chapter) and you need to find your feet before you can think about strategy.</span>
+    </div>
+  </div>
+
+  <label style="display:block;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;margin-top:16px;">Anything you want to add about where you're at?</label>
+  <textarea id="a0" placeholder="Totally optional. But if there's context that would help me understand your starting point, this is the place." rows="3"></textarea>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(1)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="go(3)">Let's get into it &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 3: IDEAL TUESDAY (Q1) + WHAT BUILDING (Q2)
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s3">
+  <div class="sec-label">Vision</div>
+
+  <div class="ns amber">
+    <div class="ns-head">4-7-8 Breath (shift your brain into a different gear)</div>
+    <p>This one slows your thinking down on purpose. You're about to picture a future version of your life, and that requires a different brain state than the one you showed up in. <strong>Inhale 4 counts, Hold 7, Exhale 8.</strong></p>
+    <div class="breath-row">
+      <div class="bcircle calm"></div>
+      <div class="breath-label">
+        <strong>This breath is longer and slower.</strong>
+        Let it be. The exhale is the point.
+      </div>
+    </div>
+  </div>
+
+  <div class="qnum">Question 1 of 12</div>
+  <h2>It's a Tuesday, two years from now. Your life is working. Describe the day.</h2>
+  <p class="guide">Not the highlight reel. A regular day. Where are you? What does the morning feel like? Who's around? What kind of work are you doing (and not doing)? Be specific. Be honest about what you actually want, not what sounds impressive.</p>
+  <textarea id="a1" placeholder="Wake up, and walk me through it. The more specific and real, the more useful this is for both of us." rows="5"></textarea>
+
+  <button class="rt-btn" onclick="rt('r1',this)">This question is harder than it looks</button>
+  <div class="rpanel" id="r1">
+    <p>It is. Most people have never been asked to describe what they actually want without dressing it up for someone else.</p>
+    <div class="exbox">
+      <p><strong>Try this:</strong> Close your eyes for ten seconds. Picture yourself waking up on that Tuesday. Don't edit. What's the first thing you see? What do you hear? Now open your eyes and write whatever came up, even if it surprised you.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <div class="qnum">Question 2 of 12</div>
+    <h2>What are you building (or trying to build)?</h2>
+    <p class="guide">A business, a practice, a creative project, a career pivot, a side thing that might become the main thing. Whatever it is, tell me about it in your own words. Messy is fine. "I don't know yet" is a real answer.</p>
+
+    <div id="n1" class="pnote">If you picked "not sure what yet" or "exhausted," this might feel like the hardest question on here. That's okay. Tell me what you're drawn to, what you keep thinking about, or what you'd try if failure wasn't a factor.</div>
+
+    <textarea id="a2" placeholder="Tell me what you're working on, dreaming about, or trying to figure out." rows="4"></textarea>
+
+    <button class="rt-btn" onclick="rt('r2',this)">I genuinely don't know what I'm building</button>
+    <div class="rpanel" id="r2">
+      <p>That's actually a useful starting point. "I don't know" means you haven't committed to the wrong thing yet.</p>
+      <div class="exbox">
+        <p><strong>Try this instead:</strong> What do people keep asking you for help with, even when you haven't offered? What topic can you talk about for an hour without getting bored? What would you build if you knew it would work? Write any of those and we'll find the thread together.</p>
+      </div>
+      <div class="witw">
+        <p>You might also want to explore <strong>Work in the Wild</strong>, a free resource I built for exactly this stage. It has self-assessments and frameworks for people who are figuring out their next move. <a href="https://bit.ly/WorkintheWildkofi" target="_blank">Check it out here &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(2)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="go(4)">Continue &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 4: UNINVITED SKILL (Q3) + WORKING (Q4) + NOT WORKING (Q5)
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s4">
+  <div class="sec-label">What's Real</div>
+
+  <div class="qnum">Question 3 of 12</div>
+  <h2>What do people come to you for, even when you haven't offered?</h2>
+  <p class="guide">The friend who always calls you for advice on something specific. The colleague who keeps pulling you into their project. The thing people assume you do professionally even when you don't. That pattern is data.</p>
+  <textarea id="a3" placeholder="Think about the last three times someone asked for your help, opinion, or expertise out of the blue. What was the topic?" rows="4"></textarea>
+
+  <button class="rt-btn" onclick="rt('r3',this)">I'm not sure I have a thing like that</button>
+  <div class="rpanel" id="r3">
+    <p>You probably do and you've just stopped noticing it. People rarely name their own strengths accurately.</p>
+    <div class="exbox">
+      <p><strong>The Three Thank-Yous Exercise:</strong> Think of the last three times someone thanked you for something or said "you're so good at that." What were they thanking you for? Write those three things down. The overlap between them is your invisible skill set.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <div class="qnum">Question 4 of 12</div>
+    <h2>What's already working?</h2>
+    <p class="guide">Even if it feels small, partial, or accidental. What's gaining traction? What do people respond to? What feels easiest?</p>
+    <textarea id="a4" placeholder="The stuff that's working even without a strategy behind it." rows="3"></textarea>
+  </div>
+
+  <div style="margin-top:28px;">
+    <div class="qnum">Question 5 of 12</div>
+    <h2>What have you tried that didn't work (or felt wrong)?</h2>
+    <p class="guide">Marketing approaches, business models, partnerships, pricing experiments. Anything you invested time in that landed flat or made you want to quit. Knowing what didn't work is as useful as knowing what did.</p>
+    <textarea id="a5" placeholder="No judgment here. Everything you tried taught you something, even if the lesson was 'never again.'" rows="3"></textarea>
+
+    <button class="rt-btn" onclick="rt('r5',this)">I've tried so many things I can't keep track</button>
+    <div class="rpanel" id="r5">
+      <p>That is more common than you think. And honestly, it usually means you've been resourceful, not scattered.</p>
+      <div class="exbox">
+        <p><strong>Quick sort:</strong> List three things you tried. For each one, write whether it failed because of the idea itself, the timing, the execution, or because it just wasn't you. Most "failures" are timing or execution problems, not idea problems. We can sort through this together.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(3)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="go(5)">Continue &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 5: WALKING AWAY (Q6) + AUDIENCE (Q7) + NON-NEGOTIABLES (Q8)
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s5">
+  <div class="sec-label">Direction</div>
+
+  <div class="qnum">Question 6 of 12</div>
+  <h2>What are you walking away from?</h2>
+  <p class="guide">A career, a way of working, a version of yourself, an industry. Sometimes the clearest compass is knowing what you're done with. And if you're grieving a thing you also loved? That's real and it belongs here too.</p>
+
+  <div id="n2" class="pnote">If you're in transition, this one might carry some weight. Leaving something you were good at (or that defined you for a long time) involves real loss, even when you're relieved. Herminia Ibarra's research on career transitions says identity shifts take longer than skill shifts. You're not behind. You're in the middle of a real thing.</div>
+
+  <textarea id="a6" placeholder="What are you leaving? And what, if anything, do you want to bring with you from that world?" rows="4"></textarea>
+
+  <div style="margin-top:28px;">
+    <div class="qnum">Question 7 of 12</div>
+    <h2>Who do you want to help?</h2>
+    <p class="guide">Not a marketing persona. An actual type of person. Describe them like you're telling a friend about someone you met who you wish you could work with.</p>
+
+    <div id="n3" class="pnote">If you're not sure yet, think about the people who've already benefited from your help (even casually). Who felt like your people? Who energized you instead of draining you?</div>
+
+    <textarea id="a7" placeholder="Paint me a picture. Who are they, what are they dealing with, and why do you care?" rows="4"></textarea>
+
+    <button class="rt-btn" onclick="rt('r7',this)">I want to help everyone (I know that's not a strategy)</button>
+    <div class="rpanel" id="r7">
+      <p>It's not. But it's also the sign of someone who genuinely cares, so let's work with it instead of against it.</p>
+      <div class="exbox">
+        <p><strong>Three quick tests:</strong></p>
+        <p><strong>Coffee test:</strong> Who would you happily spend an hour with for free, just talking about their situation?</p>
+        <p><strong>Protection test:</strong> Who makes you angry on their behalf when they get bad advice?</p>
+        <p><strong>Mirror test:</strong> Who reminds you of an earlier version of yourself?</p>
+        <p>The overlap between those three answers is your audience. Write whatever came up.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <div class="qnum">Question 8 of 12</div>
+    <h2>What will you absolutely not do?</h2>
+    <p class="guide">Boundaries are strategy. What's off the table? Types of work, types of clients, ways of working, schedules, compromises. The non-negotiables.</p>
+    <textarea id="a8" placeholder="The lines you won't cross, even if someone waves money at you." rows="3"></textarea>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(4)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="go(6)">Almost there &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 6: CAPACITY (Q9) + WIN (Q10) + MONEY (Q11)
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s6">
+  <div class="sec-label">Capacity + Money</div>
+
+  <div class="ns mint">
+    <div class="ns-head">Quick reset (box breathing, 30 seconds)</div>
+    <p>You're in the homestretch and these last few questions ask you to get honest about energy and money, which are the questions most people rush through because they're uncomfortable. Slow down for a second. <strong>Inhale 4, Hold 4, Exhale 4, Hold 4.</strong></p>
+    <div class="breath-row">
+      <div class="bcircle box"></div>
+      <div class="breath-label">
+        <strong>One round.</strong>
+        Then keep going from a grounded place.
+      </div>
+    </div>
+  </div>
+
+  <div class="qnum">Question 9 of 12</div>
+  <h2>What does your actual capacity look like right now?</h2>
+  <p class="guide">Hours per week you can realistically dedicate to this. Energy levels (honestly). Other commitments pulling at you. Health stuff, family stuff, life stuff. I'm not asking so I can push you harder. I'm asking so I can build a plan your body can actually sustain.</p>
+
+  <div id="n4" class="pnote">If capacity feels like a loaded question right now, that's information too. Write what's real, not what you think you should be able to handle.</div>
+
+  <textarea id="a9" placeholder="Be honest. I'd rather know you have 5 good hours a week than pretend you have 20." rows="3"></textarea>
+
+  <button class="rt-btn" onclick="rt('r9',this)">My capacity changes constantly and I can't predict it</button>
+  <div class="rpanel" id="r9">
+    <p>Welcome to the club. Fluctuating capacity is not a character flaw. It is a design constraint, and good strategy accounts for it.</p>
+    <div class="exbox">
+      <p><strong>The Capacity Audit:</strong> Think about the last two weeks. How many hours did you actually spend on your work or project (not thinking about it, actually doing it)? What time of day were those hours? Were they chosen or squeezed in? That pattern is your real capacity baseline. Write it down.</p>
+    </div>
+    <div class="witw">
+      <p>The <strong>Red/Green Energy Audit</strong> in Work in the Wild was built for exactly this. It's a 3-day tracking exercise that shows you where your energy actually goes. <a href="https://bit.ly/WorkintheWildkofi" target="_blank">Grab it free here &rarr;</a></p>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <div class="qnum">Question 10 of 12</div>
+    <h2>What does "working" look like for you?</h2>
+    <p class="guide">What's the win condition? Not "world domination" (unless that's genuinely your thing). What specific thing, if it happened in the next 6 to 12 months, would make you feel like this was worth it?</p>
+    <textarea id="a10" placeholder="Finish this sentence: I would feel like this is working if..." rows="3"></textarea>
+
+    <button class="rt-btn" onclick="rt('r10',this)">I honestly don't know what success looks like for me</button>
+    <div class="rpanel" id="r10">
+      <p>That is a very good thing to know about yourself right now. Seriously. Most people are chasing a finish line they never chose.</p>
+      <div class="exbox">
+        <p><strong>The Magic Wand:</strong> If I could guarantee one thing would be true about your work life in a year, and you didn't have to explain or justify it to anyone, what would it be? Write the first thing that comes to mind, before your brain starts editing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:28px;">
+    <div class="qnum">Question 11 of 12</div>
+    <h2>The money question.</h2>
+    <p class="guide">What's your financial picture? Are you supporting yourself with this work already? Is there a runway? A day job funding the dream? Savings with a deadline? I'm not asking to judge your number. I'm asking because strategy without financial honesty is just daydreaming with a spreadsheet.</p>
+    <textarea id="a11" placeholder="Whatever you're comfortable sharing. Even 'I'd rather discuss this in person' is a valid answer." rows="3"></textarea>
+
+    <button class="rt-btn" onclick="rt('r11',this)">Money is a hard topic for me</button>
+    <div class="rpanel" id="r11">
+      <p>You are not alone in that, and it is not a weakness. Most people who care deeply about their work have a complicated relationship with charging for it. The Trauma of Money framework names this well: our money stories are usually inherited, not chosen.</p>
+      <div class="exbox">
+        <p><strong>One question:</strong> If you knew the number you wanted was completely reasonable, and you were allowed to want it, what would it be? You don't have to share it. Just let yourself know it. Then write whatever you're comfortable with above.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(5)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="go(7)">One more &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 7: ANYTHING ELSE (Q12)
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s7">
+  <div class="sec-label">Open Floor</div>
+
+  <div class="qnum">Question 12 of 12</div>
+  <h2>What else would help me understand you or your situation?</h2>
+  <p class="guide">Life stuff, brain stuff, past experiences, fears, things you're proud of, context that didn't fit anywhere else. This is the junk drawer question and it's often where the most useful stuff lives.</p>
+  <textarea id="a12" placeholder="Anything this form cracked open, or anything I haven't asked about that matters." rows="5"></textarea>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(6)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="go(8)">See what I'm seeing &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 8: REFLECTION
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s8">
+  <div class="sec-label">A Preliminary Read</div>
+  <h2>Here's what I'm seeing in your answers.</h2>
+  <p class="guide" style="margin-bottom:22px">This is a first pass, generated from what you've shared. It's not a diagnosis. Think of it as a starting point for our conversation.</p>
+
+  <div class="rbox" id="rbox">
+    <div class="rloading">
+      <div class="dots"><span></span><span></span><span></span></div>
+      Reading your answers...
+    </div>
+  </div>
+
+  <div class="witw">
+    <p>Curious and want to keep going? <strong>Work in the Wild</strong> is a free, open-source visibility and strategy resource with frameworks, self-assessments, and tools you can use today. <a href="https://bit.ly/WorkintheWildkofi" target="_blank">Explore it here &rarr;</a></p>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-nav btn-back" onclick="go(7)">&larr; Back</button>
+    <button class="btn-nav btn-next" onclick="go(9)">Send this to Dani &rarr;</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 9: SUBMIT
+     ═══════════════════════════════════════════════════════ -->
+<div class="sec" id="s9">
+  <div class="closing">
+    <h2>You did the hard part.</h2>
+    <p>Getting honest about where you are is the first move, and most people skip it entirely. You didn't. That tells me something good about you already.</p>
+    <p class="sig">I'll read your answers and come back with what I see. No pitch. Just a real conversation about what's possible.</p>
+  </div>
+
+  <div class="hr"></div>
+  <p style="font-size:14px;color:var(--text-dim);margin-bottom:14px">Your answers are summarized below. Send them to me, or copy them for your own records (or both).</p>
+  <div class="summary" id="sumBox"></div>
+  <div class="btn-group">
+    <!-- ──────────────────────────────────────────────────
+         CHANGE YOUR EMAIL HERE: Replace [YOUR-EMAIL-HERE]
+         with your actual email address.
+         ────────────────────────────────────────────────── -->
+    <a id="mailBtn" href="#" class="btn-email">Send to Dani &rarr;</a>
+    <button class="btn-copy" onclick="doCopy()">Copy my answers</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   NAVIGATION + STATE
+   ═══════════════════════════════════════════════════════ */
+let path = '';
+let cur = 0;
+const TOTAL = 10;
+const STORAGE_KEY = 'wiwa_intake_v2';
+
+function go(n) {
+  saveState();
+  document.getElementById('s'+cur).classList.remove('active');
+  cur = n;
+  document.getElementById('s'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('pf').style.width = ((cur/(TOTAL-1))*100)+'%';
+  if (n===8) doReflection();
+  if (n===9) buildSubmit();
+}
+
+function goWithEmailCheck(n) {
+  const email = document.getElementById('aEmail').value.trim();
+  const err = document.getElementById('emailErr');
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    err.classList.add('show');
+    document.getElementById('aEmail').focus();
+    return;
+  }
+  err.classList.remove('show');
+  go(n);
+}
+
+function pickPath(p, el) {
+  path = p;
+  document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('on'));
+  el.classList.add('on');
+  // Show path-conditional notes for B and C
+  const show = (p==='B'||p==='C');
+  ['n1','n2','n3','n4'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { if(show) el.classList.add('visible'); else el.classList.remove('visible'); }
+  });
+  saveState();
+}
+
+function rt(id, btn) {
+  document.getElementById(id).classList.toggle('open');
+  btn.classList.toggle('open');
+}
+
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function allAnswers() {
+  return {
+    email: val('aEmail'), name: val('aName'),
+    path, pathDetail: val('a0'),
+    q1:val('a1'), q2:val('a2'), q3:val('a3'),
+    q4:val('a4'), q5:val('a5'), q6:val('a6'),
+    q7:val('a7'), q8:val('a8'), q9:val('a9'),
+    q10:val('a10'), q11:val('a11'), q12:val('a12')
+  };
+}
+
+/* ═══════════════════════════════════════════════════════
+   LOCAL STORAGE (answers persist across reloads)
+   ═══════════════════════════════════════════════════════ */
+function saveState() {
+  try {
+    const state = { ...allAnswers(), section: cur };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    const note = document.getElementById('savedNote');
+    note.classList.add('show');
+    setTimeout(() => note.classList.remove('show'), 1500);
+  } catch(e) { /* silent fail if storage unavailable */ }
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    if (s.email) document.getElementById('aEmail').value = s.email;
+    if (s.name) document.getElementById('aName').value = s.name;
+    if (s.pathDetail) document.getElementById('a0').value = s.pathDetail;
+    if (s.q1) document.getElementById('a1').value = s.q1;
+    if (s.q2) document.getElementById('a2').value = s.q2;
+    if (s.q3) document.getElementById('a3').value = s.q3;
+    if (s.q4) document.getElementById('a4').value = s.q4;
+    if (s.q5) document.getElementById('a5').value = s.q5;
+    if (s.q6) document.getElementById('a6').value = s.q6;
+    if (s.q7) document.getElementById('a7').value = s.q7;
+    if (s.q8) document.getElementById('a8').value = s.q8;
+    if (s.q9) document.getElementById('a9').value = s.q9;
+    if (s.q10) document.getElementById('a10').value = s.q10;
+    if (s.q11) document.getElementById('a11').value = s.q11;
+    if (s.q12) document.getElementById('a12').value = s.q12;
+    if (s.path) {
+      path = s.path;
+      const idx = {A:0,B:1,C:2}[s.path];
+      if (idx !== undefined) {
+        const cards = document.querySelectorAll('.pcard');
+        if (cards[idx]) { cards[idx].classList.add('on'); }
+        if (s.path==='B'||s.path==='C') {
+          ['n1','n2','n3','n4'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('visible');
+          });
+        }
+      }
+    }
+    // If they had progress, offer to resume
+    if (s.section && s.section > 0) {
+      const resume = confirm('Welcome back. You have saved answers from last time. Pick up where you left off?');
+      if (resume) {
+        document.getElementById('s0').classList.remove('active');
+        cur = s.section;
+        document.getElementById('s'+cur).classList.add('active');
+        document.getElementById('pf').style.width = ((cur/(TOTAL-1))*100)+'%';
+      }
+    }
+  } catch(e) { /* silent fail */ }
+}
+
+// Auto-save on input
+document.addEventListener('input', function(e) {
+  if (e.target.matches('textarea, input')) {
+    clearTimeout(window._saveTimer);
+    window._saveTimer = setTimeout(saveState, 1500);
+  }
+});
+
+/* ═══════════════════════════════════════════════════════
+   REFLECTION (Claude API)
+   ═══════════════════════════════════════════════════════ */
+async function doReflection() {
+  const a = allAnswers();
+  const rbox = document.getElementById('rbox');
+
+  const prompt = `You are an organizational design expert and strengths coach working with neurodivergent entrepreneurs, career changers, and small business owners. You have a direct, warm, honest voice. You do not flatter, but you see clearly and you genuinely like people.
+
+A person has completed a strategy intake form. Their answers:
+
+NAME: ${a.name || '(not given)'}
+PATH: ${a.path || 'not selected'} ${a.path==='A'?'(has a thing, wants to grow)':a.path==='B'?'(wants something different, not sure what)':a.path==='C'?'(exhausted, figuring out what is next)':''}
+Path detail: ${a.pathDetail || '(none)'}
+1. Ideal Tuesday in 2 years: ${a.q1 || '(skipped)'}
+2. What they are building: ${a.q2 || '(skipped)'}
+3. What people come to them for uninvited: ${a.q3 || '(skipped)'}
+4. What is working: ${a.q4 || '(skipped)'}
+5. What has not worked: ${a.q5 || '(skipped)'}
+6. Walking away from: ${a.q6 || '(skipped)'}
+7. Who they want to help: ${a.q7 || '(skipped)'}
+8. Non-negotiables: ${a.q8 || '(skipped)'}
+9. Energy and capacity: ${a.q9 || '(skipped)'}
+10. Win condition: ${a.q10 || '(skipped)'}
+11. Financial picture: ${a.q11 || '(skipped)'}
+12. Anything else: ${a.q12 || '(skipped)'}
+
+Write 3 to 4 short paragraphs that:
+1. Name a strength or pattern they are showing but probably have not named themselves. Be specific. Pull from their actual words.
+2. Find the thread that connects their answers into something coherent (even if they do not see it yet). Name it plainly.
+3. Name one honest tension or contradiction in their answers directly, without softening it into nothing, but with respect. This is not a gotcha. It is a gift.
+4. End on something that makes them want to have the conversation. Not hype, not flattery. Real possibility grounded in what they actually wrote.
+
+VOICE RULES: No bullet points. No numbered lists. No em dashes. No three-sentence AI patterns. Write like a smart, warm human who has read their answers carefully and is speaking directly to them. Use their name if they gave one. Contractions are good. Parenthetical asides are good. Do not start paragraphs with "I notice" or "It is clear that." Be direct and specific.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await response.json();
+    const text = data.content && data.content[0] ? data.content[0].text : 'I was not able to generate a reflection right now. But Dani will read your answers directly and come to your session with her own read. This part is a bonus, not a requirement.';
+    rbox.innerHTML = '<p style="white-space:pre-wrap;line-height:1.8">' + text.replace(/\n\n/g, '</p><p style="white-space:pre-wrap;line-height:1.8;margin-top:14px">') + '</p>';
+  } catch(e) {
+    rbox.innerHTML = '<p>The reflection tool could not load right now (it needs an internet connection). No worries. Dani will read your answers directly and come to your session with her own read.</p>';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   SUBMIT / SUMMARY
+   ═══════════════════════════════════════════════════════ */
+function buildSubmit() {
+  const a = allAnswers();
+  const lines = [
+    'BEFORE WE MEET — INTAKE FORM',
+    '================================',
+    '',
+    'NAME: ' + (a.name || '(not given)'),
+    'EMAIL: ' + (a.email || '(not given)'),
+    'PATH: ' + (a.path==='A'?'Has a thing, wants to grow':a.path==='B'?'Wants something different':a.path==='C'?'Exhausted, figuring it out':'(not selected)'),
+    a.pathDetail ? 'Context: ' + a.pathDetail : '',
+    '',
+    '1. IDEAL TUESDAY (2 YEARS OUT)',
+    a.q1 || '(skipped)',
+    '',
+    '2. WHAT THEY ARE BUILDING',
+    a.q2 || '(skipped)',
+    '',
+    '3. WHAT PEOPLE COME TO THEM FOR',
+    a.q3 || '(skipped)',
+    '',
+    '4. WHAT IS WORKING',
+    a.q4 || '(skipped)',
+    '',
+    '5. WHAT HAS NOT WORKED',
+    a.q5 || '(skipped)',
+    '',
+    '6. WALKING AWAY FROM',
+    a.q6 || '(skipped)',
+    '',
+    '7. WHO THEY WANT TO HELP',
+    a.q7 || '(skipped)',
+    '',
+    '8. NON-NEGOTIABLES',
+    a.q8 || '(skipped)',
+    '',
+    '9. ENERGY AND CAPACITY',
+    a.q9 || '(skipped)',
+    '',
+    '10. WIN CONDITION',
+    a.q10 || '(skipped)',
+    '',
+    '11. FINANCIAL PICTURE',
+    a.q11 || '(skipped)',
+    '',
+    '12. ANYTHING ELSE',
+    a.q12 || '(skipped)'
+  ].filter(l => l !== '').join('\n');
+
+  document.getElementById('sumBox').textContent = lines;
+
+  /* ──────────────────────────────────────────────────────
+     CHANGE YOUR EMAIL HERE: Replace [YOUR-EMAIL-HERE]
+     with your actual email address.
+     ────────────────────────────────────────────────────── */
+  const toEmail = '[YOUR-EMAIL-HERE]';
+  const sub = encodeURIComponent('Before We Meet — ' + (a.name || 'New Intake'));
+  const bod = encodeURIComponent(lines);
+  document.getElementById('mailBtn').href = 'mailto:' + toEmail + '?subject=' + sub + '&body=' + bod;
+}
+
+function doCopy() {
+  const txt = document.getElementById('sumBox').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const b = document.querySelector('.btn-copy');
+    b.textContent = 'Copied!';
+    setTimeout(()=>b.textContent='Copy my answers', 2000);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', loadState);
+</script>
+</body>
+</html>
