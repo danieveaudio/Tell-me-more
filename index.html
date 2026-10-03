@@ -3,52 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Before We Meet — Strategy for the Wired & Wild</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;1,6..12,400&display=swap" rel="stylesheet">
+<title>Before We Meet | Dani Eve</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════
-   COLOR THEORY / NS NOTES
+   PALETTE (canonical design spec, nothing else is allowed)
    ───────────────────────────────────────────────────────
-   Base cream (#FBF7F0): warm, open, safe. Reduces 
-   visual cortisol response vs stark white or dark.
-   Deep purple headers: grounding authority without
-   aggression. Amber accents: warmth, forward motion.
-   Mint for breathing/NS moments: parasympathetic 
-   activation, calm without sleepy.
-   No red, no high-contrast flashing, no sharp edges.
+   Ink #222222 = body text
+   Deep Purple #703BB0 = headings
+   Paper #FAF7F2 = page
+   Amber (bar #F7AB03, fill #FDF1D3, text #9A6B00) = do this next
+   Mint (bar #1FE7B7, fill #E7FBF5, text #0E9E85) = pause, breathe, permission
+   Cyan #00BBDC = links
+   Lavender #DF6DF7 = asides
+   Grey #70707A = meta
+   Fonts: Poppins = headings and buttons, Lato = body
    Rounded corners throughout = perceived safety.
    ═══════════════════════════════════════════════════════ */
 
 :root {
+  --ink: #222222;
+  --deep-purple: #703BB0;
+  --paper: #FAF7F2;
   --amber: #F7AB03;
-  --amber-soft: #FFF4D9;
-  --amber-mid: #FFE49A;
-  --cyan: #00BBDC;
-  --purple: #7B66FF;
-  --purple-soft: #EEEAFF;
-  --magenta: #E93EFB;
-  --lavender: #F3EEFF;
-  --dpurple: #703BB0;
+  --amber-fill: #FDF1D3;
+  --amber-text: #9A6B00;
   --mint: #1FE7B7;
-  --mint-soft: #E2FBF3;
-  --cream: #FBF7F0;
-  --warm-white: #FFFCF7;
-  --text: #2D2A3E;
-  --text-mid: #5C5477;
-  --text-dim: #8E86A8;
-  --surface: #F5F0EA;
-  --surface2: #EDE7DF;
-  --border: rgba(112,59,176,0.12);
-  --border-light: rgba(112,59,176,0.06);
-  --shadow: rgba(45,42,62,0.06);
+  --mint-fill: #E7FBF5;
+  --mint-text: #0E9E85;
+  --cyan: #00BBDC;
+  --lavender: #DF6DF7;
+  --grey: #70707A;
+  --shadow: rgba(34,34,34,0.08);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--cream);
-  color: var(--text);
-  font-family: 'Nunito Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Lato', sans-serif;
   font-size: 16.5px;
   line-height: 1.75;
   min-height: 100vh;
@@ -58,7 +52,7 @@ body {
 /* ── PROGRESS ── */
 .progress {
   position: fixed; top: 0; left: 0; right: 0;
-  height: 4px; background: var(--surface2); z-index: 200;
+  height: 4px; background: var(--grey); z-index: 200;
 }
 .progress-fill {
   height: 100%;
@@ -73,15 +67,15 @@ body {
   padding: 24px 48px;
   display: flex; align-items: center; gap: 10px;
   position: sticky; top: 0;
-  background: linear-gradient(to bottom, var(--cream) 70%, transparent);
+  background: linear-gradient(to bottom, var(--paper) 70%, transparent);
   z-index: 100;
 }
 .dot { width: 7px; height: 7px; background: var(--amber); border-radius: 50%; flex-shrink: 0; }
 .brand {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 13px; font-weight: 700;
   letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--dpurple);
+  color: var(--deep-purple);
 }
 
 /* ── LAYOUT ── */
@@ -103,63 +97,64 @@ body {
 }
 
 .sec-label {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--dpurple); opacity: 0.6;
+  color: var(--grey);
   margin-bottom: 10px;
 }
 
 h1 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 30px; font-weight: 800;
-  line-height: 1.25; color: var(--dpurple);
+  line-height: 1.25; color: var(--deep-purple);
   margin-bottom: 16px;
 }
 h2 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 22px; font-weight: 700;
-  line-height: 1.3; color: var(--text);
+  line-height: 1.3; color: var(--deep-purple);
   margin-bottom: 10px;
 }
 
 .guide {
-  color: var(--text-mid); font-size: 15.5px;
+  color: var(--ink); font-size: 15.5px;
   margin-bottom: 20px; line-height: 1.7;
 }
 
 .qnum {
-  font-size: 12px; color: var(--text-dim);
-  font-weight: 600; letter-spacing: 0.04em;
+  font-size: 12px; color: var(--grey);
+  font-weight: 700; letter-spacing: 0.04em;
   margin-bottom: 8px;
 }
 
 /* ── INPUTS ── */
 textarea, input[type="text"], input[type="email"] {
   width: 100%; padding: 16px 18px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--grey);
   border-radius: 10px;
-  background: var(--warm-white);
-  color: var(--text);
-  font-family: 'Nunito Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Lato', sans-serif;
   font-size: 15.5px; line-height: 1.65;
   transition: border-color 0.2s, box-shadow 0.2s;
   resize: vertical;
 }
 textarea:focus, input[type="text"]:focus, input[type="email"]:focus {
-  outline: none;
-  border-color: var(--purple);
-  box-shadow: 0 0 0 3px rgba(123,102,255,0.1);
+  outline: 2px solid var(--deep-purple);
+  outline-offset: 2px;
+  border-color: var(--deep-purple);
 }
 textarea::placeholder, input::placeholder {
-  color: var(--text-dim); font-style: italic;
+  color: var(--grey); font-style: italic;
 }
 
 .required-label {
   display: inline-block;
   font-size: 11px; font-weight: 700;
-  color: var(--dpurple); 
-  background: var(--purple-soft);
+  color: var(--amber-text);
+  background: var(--amber-fill);
+  border-left: 4px solid var(--amber);
   padding: 2px 8px; border-radius: 4px;
   margin-bottom: 8px; letter-spacing: 0.03em;
 }
@@ -169,21 +164,21 @@ textarea::placeholder, input::placeholder {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 13px 28px;
   border: none; border-radius: 10px;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px; font-weight: 700;
   cursor: pointer; transition: all 0.2s;
 }
 .btn-next {
-  background: var(--dpurple); color: white;
+  background: var(--deep-purple); color: var(--paper);
 }
-.btn-next:hover { background: #8a4fd4; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(112,59,176,0.2); }
+.btn-next:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--shadow); }
 
 .btn-back {
-  background: transparent; color: var(--text-dim);
-  border: 1.5px solid var(--border);
+  background: transparent; color: var(--grey);
+  border: 1.5px solid var(--grey);
   margin-right: 10px;
 }
-.btn-back:hover { border-color: var(--dpurple); color: var(--dpurple); }
+.btn-back:hover { border-color: var(--deep-purple); color: var(--deep-purple); }
 
 .nav-row {
   display: flex; align-items: center;
@@ -193,55 +188,54 @@ textarea::placeholder, input::placeholder {
 /* ── PATH CARDS ── */
 .paths { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
 .pcard {
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--grey);
   border-radius: 12px; padding: 20px 22px;
   cursor: pointer; transition: all 0.2s;
-  background: var(--warm-white);
+  background: var(--paper);
 }
-.pcard:hover { border-color: var(--purple); box-shadow: 0 2px 12px var(--shadow); }
+.pcard:hover { border-color: var(--deep-purple); box-shadow: 0 2px 12px var(--shadow); }
 .pcard.on {
-  border-color: var(--dpurple);
-  background: var(--lavender);
-  box-shadow: 0 2px 16px rgba(112,59,176,0.1);
+  border-color: var(--deep-purple);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--deep-purple), 0 2px 16px var(--shadow);
 }
 .pcard strong {
-  font-family: 'Syne', sans-serif;
-  font-size: 15px; color: var(--dpurple);
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px; color: var(--deep-purple);
   display: block; margin-bottom: 4px;
 }
-.pcard span { font-size: 14px; color: var(--text-mid); }
+.pcard span { font-size: 14px; color: var(--ink); }
 
-/* ── NS TOOLS ── */
+/* ── CALLOUTS ──
+   Mint = pause, breathe, permission. Amber = do this next.
+   Each is a filled block with a thick left bar and a bold caps header. */
 .ns {
   border-radius: 12px; padding: 22px 24px;
   margin: 24px 0;
 }
-.ns.mint { background: var(--mint-soft); border: 1px solid rgba(31,231,183,0.2); }
-.ns.amber { background: var(--amber-soft); border: 1px solid rgba(247,171,3,0.2); }
+.ns.mint { background: var(--mint-fill); border-left: 6px solid var(--mint); }
+.ns.amber { background: var(--amber-fill); border-left: 6px solid var(--amber); }
 .ns-head {
-  font-family: 'Syne', sans-serif;
-  font-size: 14px; font-weight: 700;
-  color: var(--dpurple); margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  margin-bottom: 8px;
 }
-.ns p { font-size: 14.5px; color: var(--text-mid); }
-.ns strong { color: var(--text); }
+.ns.mint .ns-head { color: var(--mint-text); }
+.ns.amber .ns-head { color: var(--amber-text); }
+.ns p { font-size: 14.5px; color: var(--ink); }
+.ns strong { color: var(--ink); }
 
 /* ── BREATHING ── */
 .breath-row { display: flex; align-items: center; gap: 20px; margin-top: 16px; }
 .bcircle {
   width: 56px; height: 56px;
   border-radius: 50%; flex-shrink: 0;
+  background: var(--mint);
+  border: 2px solid var(--mint-text);
 }
-.bcircle.box {
-  background: rgba(31,231,183,0.25);
-  border: 2px solid var(--mint);
-  animation: boxBreathe 16s ease-in-out infinite;
-}
-.bcircle.calm {
-  background: rgba(247,171,3,0.2);
-  border: 2px solid var(--amber);
-  animation: calmBreathe 19s ease-in-out infinite;
-}
+.bcircle.box { animation: boxBreathe 16s ease-in-out infinite; }
+.bcircle.calm { animation: calmBreathe 19s ease-in-out infinite; }
 @keyframes boxBreathe {
   0%,100% { transform: scale(0.7); opacity: 0.5; }
   12.5% { transform: scale(1); opacity: 1; }
@@ -257,26 +251,26 @@ textarea::placeholder, input::placeholder {
   21% { transform: scale(1); opacity: 1; }
   58% { transform: scale(0.65); opacity: 0.4; }
 }
-.breath-label { font-size: 13.5px; color: var(--text-mid); line-height: 1.5; }
-.breath-label strong { display: block; color: var(--text); font-size: 14px; }
+.breath-label { font-size: 13.5px; color: var(--ink); line-height: 1.5; }
+.breath-label strong { display: block; color: var(--ink); font-size: 14px; }
 
 /* ── RESOURCE TOGGLES ── */
 .rt-btn {
   background: none; border: none;
-  font-family: 'Nunito Sans', sans-serif;
-  font-size: 14px; color: var(--dpurple);
+  font-family: 'Lato', sans-serif;
+  font-size: 14px; color: var(--deep-purple);
   cursor: pointer; padding: 8px 0;
   display: flex; align-items: center; gap: 6px;
   transition: color 0.2s; margin-top: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
-.rt-btn:hover { color: var(--purple); }
+.rt-btn:hover { text-decoration: underline; }
 .rt-btn::before {
   content: '+'; display: inline-flex;
   width: 20px; height: 20px;
   align-items: center; justify-content: center;
   border-radius: 50%; font-size: 14px; font-weight: 700;
-  background: var(--purple-soft); color: var(--dpurple);
+  background: var(--deep-purple); color: var(--paper);
   transition: transform 0.3s;
 }
 .rt-btn.open::before { transform: rotate(45deg); }
@@ -284,7 +278,8 @@ textarea::placeholder, input::placeholder {
 .rpanel {
   max-height: 0; overflow: hidden;
   transition: max-height 0.4s ease, padding 0.3s ease;
-  background: var(--surface);
+  background: var(--paper);
+  border: 0 solid var(--grey);
   border-radius: 10px;
   padding: 0 20px;
   margin-top: 8px;
@@ -292,110 +287,115 @@ textarea::placeholder, input::placeholder {
 .rpanel.open {
   max-height: 600px;
   padding: 20px;
+  border-width: 1px;
 }
-.rpanel p { font-size: 14.5px; color: var(--text-mid); margin-bottom: 10px; }
-.rpanel strong { color: var(--text); }
+.rpanel p { font-size: 14.5px; color: var(--ink); margin-bottom: 10px; }
+.rpanel strong { color: var(--ink); }
 
+/* "Try this" boxes = do this next = amber */
 .exbox {
-  background: var(--warm-white);
-  border-left: 3px solid var(--amber);
-  border-radius: 0 8px 8px 0;
+  background: var(--amber-fill);
+  border-left: 6px solid var(--amber);
+  border-radius: 12px;
   padding: 14px 18px; margin: 12px 0;
 }
-.exbox p { font-size: 14px; color: var(--text); margin: 0; }
+.exbox p { font-size: 14px; color: var(--ink); margin: 0; }
+.exbox p strong { color: var(--amber-text); }
 
-/* ── PATH-CONDITIONAL NOTES ── */
+/* ── PATH-CONDITIONAL NOTES = asides = lavender ── */
 .pnote {
   display: none;
-  font-size: 14px; color: var(--dpurple);
-  background: var(--lavender);
+  font-size: 14px; color: var(--ink);
+  background: var(--paper);
+  border-left: 6px solid var(--lavender);
   border-radius: 8px; padding: 12px 16px;
   margin-bottom: 16px; line-height: 1.6;
 }
 .pnote.visible { display: block; animation: fadeUp 0.3s ease; }
 
-/* ── WITW CALLOUT ── */
+/* ── WORK IN THE WILD CALLOUT = do this next = amber ── */
 .witw {
-  border: 1px solid rgba(247,171,3,0.2);
-  border-radius: 10px; padding: 18px 22px;
-  background: var(--amber-soft); margin: 20px 0;
+  border-left: 6px solid var(--amber);
+  border-radius: 12px; padding: 18px 22px;
+  background: var(--amber-fill); margin: 20px 0;
 }
-.witw p { font-size: 14px; color: var(--text-mid); }
+.witw p { font-size: 14px; color: var(--ink); }
 /* ──────────────────────────────────────────────────────
-   CHANGE YOUR LINK HERE: Update the href below if your
-   Work in the Wild URL changes.
+   CHANGE YOUR LINK HERE: Update the href in the HTML if
+   your Work in the Wild URL changes.
    ────────────────────────────────────────────────────── */
-.witw a { color: var(--dpurple); text-decoration: none; font-weight: 600; }
-.witw a:hover { text-decoration: underline; }
+a { color: var(--cyan); font-weight: 700; text-decoration: underline; }
+a:hover { text-decoration: none; }
 
-/* ── CLOSING CARD ── */
+/* ── CLOSING CARD = permission = mint ── */
 .closing {
-  background: linear-gradient(135deg, var(--lavender), var(--amber-soft));
+  background: var(--mint-fill);
+  border-left: 6px solid var(--mint);
   border-radius: 14px; padding: 30px;
   margin-bottom: 24px;
 }
-.closing h2 { color: var(--dpurple); font-size: 24px; margin-bottom: 10px; }
-.closing p { color: var(--text-mid); font-size: 15px; }
-.closing .sig { color: var(--dpurple); font-style: italic; margin-top: 14px; font-weight: 600; }
+.closing h2 { color: var(--deep-purple); font-size: 24px; margin-bottom: 10px; }
+.closing p { color: var(--ink); font-size: 15px; }
+.closing .sig { color: var(--deep-purple); font-style: italic; margin-top: 14px; font-weight: 700; }
 
-/* ── REFLECTION BOX ── */
+/* ── WHAT HAPPENS NEXT BOX ── */
 .rbox {
-  background: var(--warm-white);
-  border: 1.5px solid var(--border);
+  background: var(--paper);
+  border: 1.5px solid var(--grey);
   border-radius: 12px; padding: 24px;
-  margin-bottom: 24px; min-height: 120px;
+  margin-bottom: 24px;
   font-size: 15px; line-height: 1.75;
-  color: var(--text);
+  color: var(--ink);
 }
-.rloading {
-  display: flex; align-items: center; gap: 12px;
-  color: var(--text-dim); font-size: 14px;
-}
-.dots span {
-  display: inline-block; width: 6px; height: 6px;
-  background: var(--dpurple); border-radius: 50%;
-  animation: pulse 1.2s ease-in-out infinite;
-  margin-right: 3px;
-}
-.dots span:nth-child(2) { animation-delay: 0.15s; }
-.dots span:nth-child(3) { animation-delay: 0.3s; }
-@keyframes pulse { 0%,100%{opacity:0.2;transform:scale(0.7)} 40%{opacity:1;transform:scale(1)} }
 
 /* ── SUMMARY ── */
 .summary {
-  background: var(--warm-white);
-  border: 1.5px solid var(--border);
+  background: var(--paper);
+  border: 1.5px solid var(--grey);
   border-radius: 10px; padding: 20px;
   font-size: 13.5px; line-height: 1.75;
-  color: var(--text-mid); white-space: pre-wrap;
+  color: var(--ink); white-space: pre-wrap;
   max-height: 260px; overflow-y: auto;
   margin-bottom: 18px;
 }
 .btn-group { display: flex; flex-direction: column; gap: 10px; }
 .btn-email {
-  background: var(--dpurple); color: white;
+  background: var(--deep-purple); color: var(--paper);
   border: none; border-radius: 10px;
   padding: 14px 28px;
-  font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700;
+  font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700;
   cursor: pointer; text-align: center;
   text-decoration: none; transition: all 0.2s; display: block;
 }
-.btn-email:hover { background: #8a4fd4; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(112,59,176,0.2); }
+.btn-email:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--shadow); text-decoration: none; }
 .btn-copy {
-  background: transparent; color: var(--text-dim);
-  border: 1.5px solid var(--border); border-radius: 10px;
+  background: transparent; color: var(--deep-purple);
+  border: 1.5px solid var(--deep-purple); border-radius: 10px;
   padding: 12px 24px;
-  font-family: 'Syne', sans-serif; font-size: 13px;
+  font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
   cursor: pointer; transition: all 0.2s;
 }
-.btn-copy:hover { border-color: var(--dpurple); color: var(--dpurple); }
+.btn-copy:hover { transform: translateY(-1px); box-shadow: 0 4px 16px var(--shadow); }
 
-.hr { height: 1px; background: var(--border); margin: 28px 0; }
+.send-note { font-size: 14px; color: var(--ink); margin-top: 16px; line-height: 1.7; }
+.send-note strong { color: var(--ink); }
+.clear-link {
+  background: none; border: none; padding: 0;
+  font-family: 'Lato', sans-serif; font-size: 13px;
+  color: var(--grey); text-decoration: underline; cursor: pointer;
+}
+.clear-link:hover { color: var(--deep-purple); }
+#clearMsg { font-size: 13px; color: var(--grey); }
+
+.bonus { display: none; margin-top: 28px; }
+.bonus.visible { display: block; animation: fadeUp 0.3s ease; }
+
+.hr { height: 1px; background: var(--grey); margin: 28px 0; }
 
 .saved-notice {
   position: fixed; bottom: 20px; right: 20px;
-  background: var(--dpurple); color: white;
-  font-family: 'Syne', sans-serif;
+  background: var(--deep-purple); color: var(--paper);
+  font-family: 'Poppins', sans-serif;
   font-size: 12px; font-weight: 600;
   padding: 8px 16px; border-radius: 8px;
   opacity: 0; transition: opacity 0.3s;
@@ -405,16 +405,16 @@ textarea::placeholder, input::placeholder {
 
 /* ── PREAMBLE EXTRAS ── */
 .preamble-detail {
-  background: var(--warm-white);
-  border: 1.5px solid var(--border-light);
+  background: var(--paper);
+  border: 1px solid var(--grey);
   border-radius: 12px; padding: 20px 24px;
   margin: 16px 0;
 }
-.preamble-detail p { font-size: 14.5px; color: var(--text-mid); margin-bottom: 6px; }
-.preamble-detail strong { color: var(--text); }
+.preamble-detail p { font-size: 14.5px; color: var(--ink); margin-bottom: 6px; }
+.preamble-detail strong { color: var(--ink); }
 
 .email-error {
-  color: #c0392b; font-size: 13px;
+  color: var(--amber-text); font-size: 13px; font-weight: 700;
   margin-top: 6px; display: none;
 }
 .email-error.show { display: block; }
@@ -434,7 +434,7 @@ textarea::placeholder, input::placeholder {
 
 <header class="site-header">
   <div class="dot"></div>
-  <span class="brand">Strategy for the Wired & Wild</span>
+  <span class="brand">Dani Eve</span>
 </header>
 
 <div class="wrap">
@@ -452,8 +452,8 @@ textarea::placeholder, input::placeholder {
 
   <div class="preamble-detail">
     <p><strong>How long will this take?</strong> Somewhere between 15 and 45 minutes, depending on how deep you want to go. Some people breeze through. Some people have revelations. Both are fine.</p>
-    <p><strong>What happens with your answers?</strong> They go directly to me (Dani) via email. Nobody else sees them. I read every word, and I come to our session with a preliminary read already forming.</p>
-    <p><strong>Can I come back to it?</strong> Yes. Your answers save automatically in your browser. Close the tab, come back later, everything will still be here.</p>
+    <p><strong>What happens with your answers?</strong> They come to me (Dani) by email once you press send. Nobody else sees them. I read every word, and I come to our session with a preliminary read already forming. Please send them back by the day before our session.</p>
+    <p><strong>Can I come back to it?</strong> Yes. Your answers save automatically in your browser. Close the tab, come back later, everything will still be here. On a shared or work computer, there's a button on the last screen to clear them.</p>
     <p><strong>Do I have to answer everything?</strong> The only required field is your email (so I can reach you). Everything else is optional. But the more honest material you give me, the more useful our conversation will be.</p>
   </div>
 
@@ -474,12 +474,12 @@ textarea::placeholder, input::placeholder {
   <p class="guide">I need your email so I can actually respond to what you share here. Your name is so I don't call you "hey you" in our session (unless that's your preference, in which case, noted).</p>
 
   <div class="required-label">Required</div>
-  <label style="display:block;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Your email address</label>
+  <label style="display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Your email address</label>
   <input type="email" id="aEmail" placeholder="the one you actually check" />
   <div class="email-error" id="emailErr">I need your email to send your answers back to you. Pop it in above.</div>
 
   <div style="margin-top:20px;">
-    <label style="display:block;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;">Your name (whatever you want me to call you)</label>
+    <label style="display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;">Your name (whatever you want me to call you)</label>
     <input type="text" id="aName" placeholder="First name, full name, nickname, stage name, all good" />
   </div>
 
@@ -493,7 +493,7 @@ textarea::placeholder, input::placeholder {
      SECTION 2: BOX BREATHING + PATH SELECTION
      ═══════════════════════════════════════════════════════ -->
 <div class="sec" id="s2">
-  <div class="sec-label">Before We Dive In</div>
+  <div class="sec-label">Before We Start</div>
   <h1>One breath first.</h1>
 
   <div class="ns mint">
@@ -527,7 +527,7 @@ textarea::placeholder, input::placeholder {
     </div>
   </div>
 
-  <label style="display:block;font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;margin-top:16px;">Anything you want to add about where you're at?</label>
+  <label style="display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px;margin-top:16px;">Anything you want to add about where you're at?</label>
   <textarea id="a0" placeholder="Totally optional. But if there's context that would help me understand your starting point, this is the place." rows="3"></textarea>
 
   <div class="nav-row">
@@ -542,7 +542,7 @@ textarea::placeholder, input::placeholder {
 <div class="sec" id="s3">
   <div class="sec-label">Vision</div>
 
-  <div class="ns amber">
+  <div class="ns mint">
     <div class="ns-head">4-7-8 Breath (shift your brain into a different gear)</div>
     <p>This one slows your thinking down on purpose. You're about to picture a future version of your life, and that requires a different brain state than the one you showed up in. <strong>Inhale 4 counts, Hold 7, Exhale 8.</strong></p>
     <div class="breath-row">
@@ -563,7 +563,7 @@ textarea::placeholder, input::placeholder {
   <div class="rpanel" id="r1">
     <p>It is. Most people have never been asked to describe what they actually want without dressing it up for someone else.</p>
     <div class="exbox">
-      <p><strong>Try this:</strong> Close your eyes for ten seconds. Picture yourself waking up on that Tuesday. Don't edit. What's the first thing you see? What do you hear? Now open your eyes and write whatever came up, even if it surprised you.</p>
+      <p><strong>Try this:</strong> Close your eyes for ten seconds. Picture yourself waking up on that Tuesday. Don't edit. What's the first thing you see? What do you hear? Now open your eyes and write whatever came up, even if it surprised you. If you don't see pictures when you close your eyes, that's fine, just describe the day in whatever way it comes, words, sounds, how your body feels, a list.</p>
     </div>
   </div>
 
@@ -633,6 +633,13 @@ textarea::placeholder, input::placeholder {
         <p><strong>Quick sort:</strong> List three things you tried. For each one, write whether it failed because of the idea itself, the timing, the execution, or because it just wasn't you. Most "failures" are timing or execution problems, not idea problems. We can sort through this together.</p>
       </div>
     </div>
+  </div>
+
+  <div id="bonusA" class="bonus">
+    <div class="qnum">Bonus question (for anyone who already has something running)</div>
+    <h2>What do you already have in place?</h2>
+    <p class="guide">Products or offers, prices, where you sell or show up right now (shops, platforms, markets, social), and who actually buys. Rough is fine, and "not much yet" is a real answer.</p>
+    <textarea id="a13" placeholder="Walk me through it like you're showing me around." rows="4"></textarea>
   </div>
 
   <div class="nav-row">
@@ -729,15 +736,15 @@ textarea::placeholder, input::placeholder {
 
   <div style="margin-top:28px;">
     <div class="qnum">Question 10 of 12</div>
-    <h2>What does "working" look like for you?</h2>
-    <p class="guide">What's the win condition? Not "world domination" (unless that's genuinely your thing). What specific thing, if it happened in the next 6 to 12 months, would make you feel like this was worth it?</p>
-    <textarea id="a10" placeholder="Finish this sentence: I would feel like this is working if..." rows="3"></textarea>
+    <h2>If one thing got clearer in our conversation, what would it be?</h2>
+    <p class="guide">This is your win condition. If we nail this, the session was worth it.</p>
+    <textarea id="a10" placeholder="Finish this sentence: I would feel like this session was worth it if..." rows="3"></textarea>
 
-    <button class="rt-btn" onclick="rt('r10',this)">I honestly don't know what success looks like for me</button>
+    <button class="rt-btn" onclick="rt('r10',this)">I honestly don't know what I'd want to get clearer on</button>
     <div class="rpanel" id="r10">
       <p>That is a very good thing to know about yourself right now. Seriously. Most people are chasing a finish line they never chose.</p>
       <div class="exbox">
-        <p><strong>The Magic Wand:</strong> If I could guarantee one thing would be true about your work life in a year, and you didn't have to explain or justify it to anyone, what would it be? Write the first thing that comes to mind, before your brain starts editing.</p>
+        <p><strong>The Magic Wand:</strong> If I could guarantee one thing would be clearer by the end of our session, and you didn't have to explain or justify it to anyone, what would it be? Write the first thing that comes to mind, before your brain starts editing.</p>
       </div>
     </div>
   </div>
@@ -745,7 +752,7 @@ textarea::placeholder, input::placeholder {
   <div style="margin-top:28px;">
     <div class="qnum">Question 11 of 12</div>
     <h2>The money question.</h2>
-    <p class="guide">What's your financial picture? Are you supporting yourself with this work already? Is there a runway? A day job funding the dream? Savings with a deadline? I'm not asking to judge your number. I'm asking because strategy without financial honesty is just daydreaming with a spreadsheet.</p>
+    <p class="guide">What does this need to do for you, financially? What's your financial picture? Are you supporting yourself with this work already? Is there a runway? A day job funding the dream? Savings with a deadline? I'm not asking to judge your number. I'm asking because strategy without financial honesty is just daydreaming with a spreadsheet.</p>
     <textarea id="a11" placeholder="Whatever you're comfortable sharing. Even 'I'd rather discuss this in person' is a valid answer." rows="3"></textarea>
 
     <button class="rt-btn" onclick="rt('r11',this)">Money is a hard topic for me</button>
@@ -776,7 +783,7 @@ textarea::placeholder, input::placeholder {
 
   <div class="nav-row">
     <button class="btn-nav btn-back" onclick="go(6)">&larr; Back</button>
-    <button class="btn-nav btn-next" onclick="go(8)">See what I'm seeing &rarr;</button>
+    <button class="btn-nav btn-next" onclick="go(8)">Continue &rarr;</button>
   </div>
 </div>
 
@@ -784,15 +791,17 @@ textarea::placeholder, input::placeholder {
      SECTION 8: REFLECTION
      ═══════════════════════════════════════════════════════ -->
 <div class="sec" id="s8">
-  <div class="sec-label">A Preliminary Read</div>
-  <h2>Here's what I'm seeing in your answers.</h2>
-  <p class="guide" style="margin-bottom:22px">This is a first pass, generated from what you've shared. It's not a diagnosis. Think of it as a starting point for our conversation.</p>
+  <div class="sec-label">What Happens Next</div>
+  <h2>Here's what happens next.</h2>
+  <p class="guide" style="margin-bottom:22px">Once I've read your answers, I'll reach out with what I think makes sense for you.</p>
 
   <div class="rbox" id="rbox">
-    <div class="rloading">
-      <div class="dots"><span></span><span></span><span></span></div>
-      Reading your answers...
-    </div>
+    <p>Nobody else sees your answers. I read every word, and I come to our session with a preliminary read already forming.</p>
+  </div>
+
+  <div class="ns mint">
+    <div class="ns-head">Before you send</div>
+    <p>You can skip anything you didn't want to answer, and you can leave this and come back to it. If something on here stirred something up, give it one round of box breathing before you send. <strong>Inhale 4, Hold 4, Exhale 4, Hold 4.</strong></p>
   </div>
 
   <div class="witw">
@@ -816,16 +825,19 @@ textarea::placeholder, input::placeholder {
   </div>
 
   <div class="hr"></div>
-  <p style="font-size:14px;color:var(--text-dim);margin-bottom:14px">Your answers are summarized below. Send them to me, or copy them for your own records (or both).</p>
+  <p style="font-size:14px;color:var(--grey);margin-bottom:14px">Your answers are summarized below. Send them to me, or copy them for your own records (or both).</p>
   <div class="summary" id="sumBox"></div>
-  <div class="btn-group">
-    <!-- ──────────────────────────────────────────────────
-         CHANGE YOUR EMAIL HERE: Replace [YOUR-EMAIL-HERE]
-         with your actual email address.
-         ────────────────────────────────────────────────── -->
-    <a id="mailBtn" href="#" class="btn-email">Send to Dani &rarr;</a>
-    <button class="btn-copy" onclick="doCopy()">Copy my answers</button>
+  <div class="ns amber">
+    <div class="ns-head">Send this by the day before our session</div>
+    <p>When it lands, I'll reply to say I've got it.</p>
   </div>
+  <div class="btn-group">
+    <!-- The email address lives in ONE place: TO_EMAIL in the script below. -->
+    <a id="mailBtn" href="#" class="btn-email">Send to Dani &rarr;</a>
+    <button class="btn-copy" onclick="doCopy()">Copy all answers</button>
+  </div>
+  <p class="send-note">The purple button opens your email app with every answer already in the message, addressed to me. You still need to press send in your email app. If nothing opens, or the message looks cut off, press Copy all answers and paste them into an email to <strong class="to-addr"></strong>.</p>
+  <p class="send-note"><button class="clear-link" onclick="clearSaved()">Clear my saved answers from this browser</button> <span id="clearMsg"></span></p>
 </div>
 
 </div><!-- /wrap -->
@@ -836,8 +848,9 @@ textarea::placeholder, input::placeholder {
    ═══════════════════════════════════════════════════════ */
 let path = '';
 let cur = 0;
+let cleared = false;
 const TOTAL = 10;
-const STORAGE_KEY = 'wiwa_intake_v2';
+const STORAGE_KEY = 'wiwa_intake_v3';
 
 function go(n) {
   saveState();
@@ -846,7 +859,6 @@ function go(n) {
   document.getElementById('s'+n).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
   document.getElementById('pf').style.width = ((cur/(TOTAL-1))*100)+'%';
-  if (n===8) doReflection();
   if (n===9) buildSubmit();
 }
 
@@ -872,6 +884,7 @@ function pickPath(p, el) {
     const el = document.getElementById(id);
     if (el) { if(show) el.classList.add('visible'); else el.classList.remove('visible'); }
   });
+  document.getElementById('bonusA').classList.toggle('visible', p==='A');
   saveState();
 }
 
@@ -888,7 +901,7 @@ function val(id) {
 function allAnswers() {
   return {
     email: val('aEmail'), name: val('aName'),
-    path, pathDetail: val('a0'),
+    path, pathDetail: val('a0'), bonusA: val('a13'),
     q1:val('a1'), q2:val('a2'), q3:val('a3'),
     q4:val('a4'), q5:val('a5'), q6:val('a6'),
     q7:val('a7'), q8:val('a8'), q9:val('a9'),
@@ -900,6 +913,7 @@ function allAnswers() {
    LOCAL STORAGE (answers persist across reloads)
    ═══════════════════════════════════════════════════════ */
 function saveState() {
+  if (cleared) return;
   try {
     const state = { ...allAnswers(), section: cur };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -929,6 +943,8 @@ function loadState() {
     if (s.q10) document.getElementById('a10').value = s.q10;
     if (s.q11) document.getElementById('a11').value = s.q11;
     if (s.q12) document.getElementById('a12').value = s.q12;
+    if (s.bonusA) document.getElementById('a13').value = s.bonusA;
+    if (s.path==='A') document.getElementById('bonusA').classList.add('visible');
     if (s.path) {
       path = s.path;
       const idx = {A:0,B:1,C:2}[s.path];
@@ -965,128 +981,97 @@ document.addEventListener('input', function(e) {
 });
 
 /* ═══════════════════════════════════════════════════════
-   REFLECTION (Claude API)
-   ═══════════════════════════════════════════════════════ */
-async function doReflection() {
-  const a = allAnswers();
-  const rbox = document.getElementById('rbox');
-
-  const prompt = `You are an organizational design expert and strengths coach working with neurodivergent entrepreneurs, career changers, and small business owners. You have a direct, warm, honest voice. You do not flatter, but you see clearly and you genuinely like people.
-
-A person has completed a strategy intake form. Their answers:
-
-NAME: ${a.name || '(not given)'}
-PATH: ${a.path || 'not selected'} ${a.path==='A'?'(has a thing, wants to grow)':a.path==='B'?'(wants something different, not sure what)':a.path==='C'?'(exhausted, figuring out what is next)':''}
-Path detail: ${a.pathDetail || '(none)'}
-1. Ideal Tuesday in 2 years: ${a.q1 || '(skipped)'}
-2. What they are building: ${a.q2 || '(skipped)'}
-3. What people come to them for uninvited: ${a.q3 || '(skipped)'}
-4. What is working: ${a.q4 || '(skipped)'}
-5. What has not worked: ${a.q5 || '(skipped)'}
-6. Walking away from: ${a.q6 || '(skipped)'}
-7. Who they want to help: ${a.q7 || '(skipped)'}
-8. Non-negotiables: ${a.q8 || '(skipped)'}
-9. Energy and capacity: ${a.q9 || '(skipped)'}
-10. Win condition: ${a.q10 || '(skipped)'}
-11. Financial picture: ${a.q11 || '(skipped)'}
-12. Anything else: ${a.q12 || '(skipped)'}
-
-Write 3 to 4 short paragraphs that:
-1. Name a strength or pattern they are showing but probably have not named themselves. Be specific. Pull from their actual words.
-2. Find the thread that connects their answers into something coherent (even if they do not see it yet). Name it plainly.
-3. Name one honest tension or contradiction in their answers directly, without softening it into nothing, but with respect. This is not a gotcha. It is a gift.
-4. End on something that makes them want to have the conversation. Not hype, not flattery. Real possibility grounded in what they actually wrote.
-
-VOICE RULES: No bullet points. No numbered lists. No em dashes. No three-sentence AI patterns. Write like a smart, warm human who has read their answers carefully and is speaking directly to them. Use their name if they gave one. Contractions are good. Parenthetical asides are good. Do not start paragraphs with "I notice" or "It is clear that." Be direct and specific.`;
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    const data = await response.json();
-    const text = data.content && data.content[0] ? data.content[0].text : 'I was not able to generate a reflection right now. But Dani will read your answers directly and come to your session with her own read. This part is a bonus, not a requirement.';
-    rbox.innerHTML = '<p style="white-space:pre-wrap;line-height:1.8">' + text.replace(/\n\n/g, '</p><p style="white-space:pre-wrap;line-height:1.8;margin-top:14px">') + '</p>';
-  } catch(e) {
-    rbox.innerHTML = '<p>The reflection tool could not load right now (it needs an internet connection). No worries. Dani will read your answers directly and come to your session with her own read.</p>';
-  }
-}
-
-/* ═══════════════════════════════════════════════════════
    SUBMIT / SUMMARY
    ═══════════════════════════════════════════════════════ */
-function buildSubmit() {
+
+/* ──────────────────────────────────────────────────────
+   CHANGE YOUR EMAIL HERE: this is the address the answers
+   go to. It is the only place it lives.
+   ────────────────────────────────────────────────────── */
+const TO_EMAIL = 'hello@danieve.com';
+
+function summaryText() {
   const a = allAnswers();
   const lines = [
-    'BEFORE WE MEET — INTAKE FORM',
+    'BEFORE WE MEET | INTAKE FORM',
     '================================',
     '',
     'NAME: ' + (a.name || '(not given)'),
     'EMAIL: ' + (a.email || '(not given)'),
-    'PATH: ' + (a.path==='A'?'Has a thing, wants to grow':a.path==='B'?'Wants something different':a.path==='C'?'Exhausted, figuring it out':'(not selected)'),
-    a.pathDetail ? 'Context: ' + a.pathDetail : '',
-    '',
-    '1. IDEAL TUESDAY (2 YEARS OUT)',
-    a.q1 || '(skipped)',
-    '',
-    '2. WHAT THEY ARE BUILDING',
-    a.q2 || '(skipped)',
-    '',
-    '3. WHAT PEOPLE COME TO THEM FOR',
-    a.q3 || '(skipped)',
-    '',
-    '4. WHAT IS WORKING',
-    a.q4 || '(skipped)',
-    '',
-    '5. WHAT HAS NOT WORKED',
-    a.q5 || '(skipped)',
-    '',
-    '6. WALKING AWAY FROM',
-    a.q6 || '(skipped)',
-    '',
-    '7. WHO THEY WANT TO HELP',
-    a.q7 || '(skipped)',
-    '',
-    '8. NON-NEGOTIABLES',
-    a.q8 || '(skipped)',
-    '',
-    '9. ENERGY AND CAPACITY',
-    a.q9 || '(skipped)',
-    '',
-    '10. WIN CONDITION',
-    a.q10 || '(skipped)',
-    '',
-    '11. FINANCIAL PICTURE',
-    a.q11 || '(skipped)',
-    '',
-    '12. ANYTHING ELSE',
-    a.q12 || '(skipped)'
-  ].filter(l => l !== '').join('\n');
+    'PATH: ' + (a.path==='A'?'Has a thing, wants to grow':a.path==='B'?'Wants something different':a.path==='C'?'Exhausted, figuring it out':'(not selected)')
+  ];
+  if (a.pathDetail) lines.push('Context: ' + a.pathDetail);
+  [
+    ['1. IDEAL TUESDAY (2 YEARS OUT)', 'q1'],
+    ['2. WHAT THEY ARE BUILDING', 'q2'],
+    ['3. WHAT PEOPLE COME TO THEM FOR', 'q3'],
+    ['4. WHAT IS WORKING', 'q4'],
+    ['5. WHAT HAS NOT WORKED', 'q5'],
+    ['6. WALKING AWAY FROM', 'q6'],
+    ['7. WHO THEY WANT TO HELP', 'q7'],
+    ['8. NON-NEGOTIABLES', 'q8'],
+    ['9. ENERGY AND CAPACITY', 'q9'],
+    ['10. WIN CONDITION (ONE THING THAT GETS CLEARER)', 'q10'],
+    ['11. FINANCIAL PICTURE', 'q11'],
+    ['12. ANYTHING ELSE', 'q12']
+  ].forEach(function(q) { lines.push('', q[0], a[q[1]] || '(skipped)'); });
+  if (a.path==='A') lines.push('', 'BONUS (PATH A). WHAT THEY ALREADY HAVE IN PLACE', a.bonusA || '(skipped)');
+  return lines.join('\n');
+}
 
-  document.getElementById('sumBox').textContent = lines;
+function buildSubmit() {
+  const a = allAnswers();
+  const text = summaryText();
+  document.getElementById('sumBox').textContent = text;
 
-  /* ──────────────────────────────────────────────────────
-     CHANGE YOUR EMAIL HERE: Replace [YOUR-EMAIL-HERE]
-     with your actual email address.
-     ────────────────────────────────────────────────────── */
-  const toEmail = '[YOUR-EMAIL-HERE]';
-  const sub = encodeURIComponent('Before We Meet — ' + (a.name || 'New Intake'));
-  const bod = encodeURIComponent(lines);
-  document.getElementById('mailBtn').href = 'mailto:' + toEmail + '?subject=' + sub + '&body=' + bod;
+  const sub = encodeURIComponent('Before We Meet | ' + (a.name || 'New Intake'));
+  const bod = encodeURIComponent(text.replace(/\n/g, '\r\n'));
+  const href = 'mailto:' + TO_EMAIL + '?subject=' + sub + '&body=' + bod;
+  document.getElementById('mailBtn').href = href;
+
+  document.querySelectorAll('.to-addr').forEach(function(el) { el.textContent = TO_EMAIL; });
+}
+
+function clearSaved() {
+  cleared = true;
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) { /* nothing to clear */ }
+  document.getElementById('clearMsg').textContent = 'Cleared from this browser. Your answers stay on this screen until you close the tab.';
+}
+
+function selectSummary() {
+  const box = document.getElementById('sumBox');
+  const r = document.createRange();
+  r.selectNodeContents(box);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(r);
 }
 
 function doCopy() {
   const txt = document.getElementById('sumBox').textContent;
-  navigator.clipboard.writeText(txt).then(()=>{
-    const b = document.querySelector('.btn-copy');
-    b.textContent = 'Copied!';
-    setTimeout(()=>b.textContent='Copy my answers', 2000);
-  });
+  const b = document.querySelector('.btn-copy');
+  function done(ok) {
+    b.textContent = ok ? 'Copied!' : 'Select the text above and copy it';
+    setTimeout(function() { b.textContent = 'Copy all answers'; }, 2500);
+  }
+  function fallback() {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = txt;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if (!ok) selectSummary();
+      done(ok);
+    } catch (e) { selectSummary(); done(false); }
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function() { done(true); }, fallback);
+  } else {
+    fallback();
+  }
 }
 
 /* ═══════════════════════════════════════════════════════
